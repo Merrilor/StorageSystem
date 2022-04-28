@@ -1,0 +1,78 @@
+﻿<Window x:Class="StorageSystem.Windows.LoginWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:StorageSystem.Windows"
+        mc:Ignorable="d"
+        Icon="/Image/iconMain.png"
+        Style="{DynamicResource CustomToolWindowStyle}"
+        WindowStartupLocation="CenterScreen"
+        Title="Login"
+        Height="450"
+        Width="400">
+    <Grid>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.1*" />
+            <ColumnDefinition />
+            <ColumnDefinition Width="0.1*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+
+        <GroupBox Header="Логин"
+                  Grid.Row="1"
+                  Grid.Column="1">
+
+            <TextBox  x:Name="UserLoginTextBox"
+                      HorizontalContentAlignment="Left"
+                      VerticalContentAlignment="Center"
+                      MaxLength="40"                     
+                      />
+
+        </GroupBox>
+
+        <GroupBox Header="Пароль"
+                  Grid.Row="2"
+                  Grid.Column="1">
+
+            <PasswordBox  x:Name="UserPasswordBox"
+                          HorizontalContentAlignment="Left"
+                          VerticalContentAlignment="Center"
+                          Padding="5 0 0 0"
+                          MaxLength="40"/>
+
+        </GroupBox>
+
+        <Button 
+            x:Name="LoginButton"
+            Grid.Column="1"
+                Grid.Row="3"
+                Content="Войти"
+                Margin="15"
+                Click="LoginButton_Click"
+                >
+
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius"
+                            Value="5" />
+                </Style>
+            </Button.Resources>
+            
+            
+        </Button>
+
+
+
+
+    </Grid>
+</Window>

@@ -296,6 +296,89 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="DataAccess\CurrentUser.cs" />
+    <Compile Include="DataAccess\StorageDbOperations.cs" />
+    <Compile Include="Model\BonusCard.cs">
+      <DependentUpon>StorageModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\BonusCardLevel.cs">
+      <DependentUpon>StorageModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Category.cs">
+      <DependentUpon>StorageModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Customer.cs">
+      <DependentUpon>StorageModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\CustomerTag.cs">
+      <DependentUpon>StorageModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Employee.cs">
+      <DependentUpon>StorageModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Gender.cs">
+      <DependentUpon>StorageModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\LoginHistory.cs">
+      <DependentUpon>StorageModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\OrderStatus.cs">
+      <DependentUpon>StorageModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Product.cs">
+      <DependentUpon>StorageModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ProductCategory.cs">
+      <DependentUpon>StorageModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ProductImage.cs">
+      <DependentUpon>StorageModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ProductType.cs">
+      <DependentUpon>StorageModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Role.cs">
+      <DependentUpon>StorageModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SaleOrder.cs">
+      <DependentUpon>StorageModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SaleOrderContent.cs">
+      <DependentUpon>StorageModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\StorageModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>StorageModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\StorageModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>StorageModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\StorageModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>StorageModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Supplier.cs">
+      <DependentUpon>StorageModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SupplyOrder.cs">
+      <DependentUpon>StorageModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\sysdiagrams.cs">
+      <DependentUpon>StorageModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Tag.cs">
+      <DependentUpon>StorageModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\User.cs">
+      <DependentUpon>StorageModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\WarehouseUnit.cs">
+      <DependentUpon>StorageModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Settings\Model\SettingsModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -331,6 +414,10 @@
       <DependentUpon>LightTheme.xaml</DependentUpon>
     </Compile>
     <Compile Include="Style\Themes\ThemesController.cs" />
+    <Page Include="Windows\LoginWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -338,6 +425,10 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UserInteraction\MessageBoxDisplay.cs" />
+    <Compile Include="Windows\LoginWindow.xaml.cs">
+      <DependentUpon>LoginWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -378,6 +469,13 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EntityDeploy Include="Model\StorageModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>StorageModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Model\StorageModel.edmx.diagram">
+      <DependentUpon>StorageModel.edmx</DependentUpon>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -398,7 +496,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Model\" />
     <Folder Include="Pages\" />
   </ItemGroup>
   <ItemGroup>
@@ -408,6 +505,16 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Model\StorageModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>StorageModel.edmx</DependentUpon>
+      <LastGenOutput>StorageModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Model\StorageModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>StorageModel.edmx</DependentUpon>
+      <LastGenOutput>StorageModel.cs</LastGenOutput>
+    </Content>
     <Content Include="Settings\Model\SettingsModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>SettingsModel.edmx</DependentUpon>

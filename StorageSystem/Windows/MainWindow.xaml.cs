@@ -20,18 +20,29 @@ namespace StorageSystem.Windows
 
     public partial class MainWindow : Window
     {
+
+        private string CurrentTheme = "Dark";
+
         public MainWindow()
         {
             InitializeComponent();
-
-
 
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
 
-            ThemesController.SetTheme(ThemesController.ThemeTypes.Light);
+            if(CurrentTheme == "Dark")
+            {
+                ThemesController.SetTheme(ThemesController.ThemeTypes.Light);
+                CurrentTheme = "Light";
+            }
+            else
+            {
+                ThemesController.SetTheme(ThemesController.ThemeTypes.ColourfulDark);
+                CurrentTheme = "Dark";
+            }
+
 
 
         }
