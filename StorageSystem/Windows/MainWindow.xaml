@@ -10,13 +10,15 @@
         WindowStartupLocation="CenterScreen"
         WindowState="Maximized"
         Style="{DynamicResource CustomWindowStyle}"
-        Title="Storage System" MinHeight="600" MinWidth="800">
+        Title="Storage System"
+        MinHeight="600"
+        MinWidth="800">
     <Grid>
 
         <Grid.RowDefinitions>
             <RowDefinition Height="50" />
             <RowDefinition />
-            <RowDefinition Height="0.1*"/>
+            <RowDefinition Height="0.0*" />
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
@@ -35,33 +37,157 @@
             </Grid.ColumnDefinitions>
 
 
-            <Border Grid.ColumnSpan="5" BorderThickness="0 0 0 2" Background="{DynamicResource ControlDarkerBackground}" BorderBrush="{DynamicResource ContainerBorder}" />
+            <Border Grid.ColumnSpan="5"
+                    BorderThickness="0 0 0 2"
+                    Background="{DynamicResource ControlDarkerBackground}"
+                    BorderBrush="{DynamicResource ContainerBorder}" />
 
-            <Button Grid.Column="4" Content="*" Margin="5" />
+            <Button Grid.Column="4"
+                    Content="*"
+                    Margin="5" />
 
             <Button Grid.Column="0"
                     x:Name="ChangeThemeButton"
-                    Content="change theme"
+                    Content="ChangeTheme"
                     Margin="5"
-                    
-                    Click="Button_Click"/>
-
+                    Click="Button_Click" />
 
         </Grid>
 
-        <Grid Grid.Row="1" Margin="0 -5 0 0" Background="{DynamicResource ControlDarkerBackground}">
+        <Grid Grid.Row="1"
+              Margin="0 -5 0 0"             
+              Background="{DynamicResource ControlDarkerBackground}">
 
             <Grid.RowDefinitions>
-                <RowDefinition Height="75"/>
+                <RowDefinition Height="75" />
+                <RowDefinition />
                 <RowDefinition />
                 <RowDefinition />
             </Grid.RowDefinitions>
 
-            
+            <StackPanel Grid.RowSpan="3"
+                        Grid.Row="1">
+
+                <Expander Header="Склад">
+
+                    <StackPanel>
+
+
+                        <Button x:Name="WarehouseListButton"
+                                Content="Просмотр склада"
+                                Style="{DynamicResource LeftContentAligned}"
+                                Click="WarehouseListButton_Click" />
+
+
+
+                        <Button Content="Список товаров"
+                                Style="{DynamicResource LeftContentAligned}" />
+
+                        <Button Content="Добавление товаров"
+                                Style="{DynamicResource LeftContentAligned}" />
+
+                        <Button Content="Добавление категорий"
+                                Style="{DynamicResource LeftContentAligned}" />
+
+                        <Button Content="Статистика"
+                                Style="{DynamicResource LeftContentAligned}" />
+
+                    </StackPanel>
+
+
+
+
+                </Expander>
+
+
+                <Expander Header="Продажи">
+
+                    <StackPanel>
+
+                        <Button Content="Просмотр заказов"
+                                Style="{DynamicResource LeftContentAligned}" />
+                        <Button Content="Добавить заказ"
+                                Style="{DynamicResource LeftContentAligned}" />
+                        <Button Content="Статистика"
+                                Style="{DynamicResource LeftContentAligned}" />
+
+                    </StackPanel>
+
+
+
+                </Expander>
+
+                <Expander Header="Поставки">
+
+                    <StackPanel>
+
+                        <Button Content="Просмотр поставок"
+                                Style="{DynamicResource LeftContentAligned}" />
+                        <Button Content="Просмотр поставщиков"
+                                Style="{DynamicResource LeftContentAligned}" />
+                        <Button Content="Добавить поставщика"
+                                Style="{DynamicResource LeftContentAligned}" />
+                        <Button Content="Запросить поставку"
+                                Style="{DynamicResource LeftContentAligned}" />
+                        <Button Content="Статистика"
+                                Style="{DynamicResource LeftContentAligned}" />
+
+                    </StackPanel>
+
+
+                </Expander>
+
+                <Expander Header="Клиенты">
+
+                    <StackPanel>
+
+                        <Button Content="Просмотр клиентов"
+                                Style="{DynamicResource LeftContentAligned}" />
+                        <Button Content="Добавить клиента"
+                                Style="{DynamicResource LeftContentAligned}" />
+                        <Button Content="Статистика"
+                                Style="{DynamicResource LeftContentAligned}" />
+
+                    </StackPanel>
+
+
+                </Expander>
+
+                <Expander Header="Администрирование">
+
+                    <StackPanel>
+
+                        <Button Content="Пользователи системы"
+                                Style="{DynamicResource LeftContentAligned}" />
+                        <Button x:Name="AddUserButton"
+                                Content="Добавить пользователя"
+                                Style="{DynamicResource LeftContentAligned}"
+                                Click="AddUserButton_Click" />
+                        <Button Content="Сотрудники"
+                                Style="{DynamicResource LeftContentAligned}" />
+                        <Button Content="Добавить сотрудника"
+                                Style="{DynamicResource LeftContentAligned}" />
+
+                    </StackPanel>
+
+                </Expander>
+
+
+
+            </StackPanel>
+
 
         </Grid>
-        
-        
+
+
+        <Frame Grid.Row="1"
+               Grid.Column="1"
+               x:Name="ContentFrame"
+               NavigationUIVisibility="Hidden">
+
+
+
+        </Frame>
 
 
 

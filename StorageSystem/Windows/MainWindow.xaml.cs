@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using REghZyFramework.Themes;
+using StorageSystem.Pages;
 using StorageSystem.Windows;
 
 namespace StorageSystem.Windows
@@ -46,5 +47,21 @@ namespace StorageSystem.Windows
 
 
         }
+
+        private void WarehouseListButton_Click(object sender, RoutedEventArgs e)
+        {
+            ContentFrame.Navigate(new WarehouseListPage());
+        }
+
+        private void AddUserButton_Click(object sender, RoutedEventArgs e)
+        {
+            ContentFrame.Navigate(new RegisterUserPage());
+        }
+
+        //TODO: Datagrid Style with themes(creator github), Font, Icons(settings button),
+
+
+
+
     }
 }

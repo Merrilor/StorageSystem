@@ -22,6 +22,7 @@ namespace StorageSystem.DataAccess
     public enum UserRole
     {
         Admin,
+        Manager,
         Employee
     }
 }
