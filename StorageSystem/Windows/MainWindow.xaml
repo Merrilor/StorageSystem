@@ -43,7 +43,9 @@
                     BorderBrush="{DynamicResource ContainerBorder}" />
 
             <Button Grid.Column="4"
-                    Content="*"
+                    Content="&#xf013;"
+                    FontFamily="{DynamicResource FontAwesome}"
+                    FontSize="25"
                     Margin="5" />
 
             <Button Grid.Column="0"

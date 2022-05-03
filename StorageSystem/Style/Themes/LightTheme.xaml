@@ -40,6 +40,9 @@
     <SolidColorBrush x:Key="ControlPrimaryColourBorderBrush" Color="#FF3294E8" />
     <SolidColorBrush x:Key="ControlBrightPrimaryColourBackground" Color="#FF3296FA" />
     <SolidColorBrush x:Key="ControlBrightPrimaryColourBorderBrush" Color="#FF50A4FA" />
+    
+    <!-- Font -->
+    <FontFamily x:Key="FontAwesome">/StorageSystem;component/Style/FontAwesome.otf#Font Awesome 6 Free Solid</FontFamily>
 
     <!-- Setup Stuff -->
 

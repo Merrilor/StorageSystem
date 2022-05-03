@@ -512,6 +512,7 @@
     <None Include="Settings\settings.db">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <Resource Include="Style\FontAwesome.otf" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
