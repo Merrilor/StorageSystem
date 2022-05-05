@@ -331,6 +331,7 @@
     <Compile Include="Model\ProductCategory.cs">
       <DependentUpon>StorageModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\ProductExtension.cs" />
     <Compile Include="Model\ProductImage.cs">
       <DependentUpon>StorageModel.tt</DependentUpon>
     </Compile>
@@ -376,6 +377,7 @@
     <Compile Include="Model\User.cs">
       <DependentUpon>StorageModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\WarehouseExtension.cs" />
     <Compile Include="Model\WarehouseUnit.cs">
       <DependentUpon>StorageModel.tt</DependentUpon>
     </Compile>
@@ -525,6 +527,7 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Image\productPlaceholder.png" />
     <Content Include="Model\StorageModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>StorageModel.edmx</DependentUpon>

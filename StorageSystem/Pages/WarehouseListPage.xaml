@@ -31,40 +31,72 @@
                 Background="{DynamicResource ControlDarkerBackground}"
                 />
 
-        <DataGrid Grid.Row="1"
+        <DataGrid 
+            x:Name="WarehouseDatagrid"
+            Grid.Row="1"
                   Margin="5"
-                  
+                  AutoGenerateColumns="False"
                   Background="{DynamicResource BackgroundColour}">
+
+            
 
 
             <DataGrid.Columns>
 
 
-                <DataGridTemplateColumn Header="Фото" Width="*"/>
+                <DataGridTemplateColumn Header="Фото"
+                                        MaxWidth="80"
+                                        Width="*">
+
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Image MaxWidth="80"
+                                   Source="{Binding Product.FirstImagePath}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                    
+                    
+                </DataGridTemplateColumn>
 
                 <DataGridTextColumn Header="Название"
+                                    Width="*"
+                                    Binding="{Binding Product.Title}"
                                    />
 
                 <DataGridTextColumn Header="Код"
+                                    Width="*"
+                                    Binding="{Binding Product.Code}"
                                      />
 
                 <DataGridTextColumn Header="Текущее количество"
+                                    Width="*"
+                                    Binding="{Binding Amount}"
                                     />
 
                 <DataGridTextColumn Header="Минимальное количество"
+                                    Width="*"
+                                    Binding="{Binding MinimalAmount}"
                                     />
 
                 <DataGridTextColumn Header="Цена за шт."
+                                    Width="*"
+                                    Binding="{Binding Product.DefaultPrice, StringFormat='{} {0} руб'}"
                                      />
 
                 <DataGridTextColumn Header="Суммарная стоимость"
-                                     />
+                                    Width="*"
+                                    Binding="{Binding TotalCost,StringFormat='{} {0:N2} руб' }"
+                                    />
 
 
                 <DataGridCheckBoxColumn Header="Доступен?"
+                                        Width="*"
+                                        x:Name="AvaiabilityGridColumn"
                                        />
 
                 <DataGridTemplateColumn Header="Изменить кол-во"
+                                        Width="*"
+                                        x:Name="ChangeAmountColumn"
                                          />
 
 

@@ -7,6 +7,9 @@
     <SolidColorBrush x:Key="WindowBorderColour" Color="#FF343434" />
     <SolidColorBrush x:Key="WindowTitleColour" Color="#FF242424" />
     <!-- Control colour themes. dont mess with em okay unless youre good at styles -->
+	
+	<BooleanToVisibilityConverter x:Key="bool2VisibilityConverter" />
+	
     <!-- Complete DarkTheme Colours -->
     <SolidColorBrush x:Key="TransparentBrush" Color="Transparent" />
     <SolidColorBrush x:Key="ContainerBackground" Color="#FF272727" />
@@ -279,6 +282,8 @@
     <Style TargetType="{x:Type DataGridCell}">
         <Setter Property="OverridesDefaultStyle"
                 Value="true" />
+				<Setter Property="Foreground"
+                Value="White" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type DataGridCell}">
@@ -287,7 +292,7 @@
                             BorderBrush="Transparent"
                             BorderThickness="1"
                             SnapsToDevicePixels="True">
-                        <ContentPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                        <ContentPresenter VerticalAlignment="Center" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup x:Name="FocusStates">
                                 <VisualState x:Name="Unfocused" />

@@ -55,5 +55,22 @@ namespace StorageSystem.DataAccess
 
         }
 
+
+        public async static Task<List<WarehouseUnit>> GetAvailableWarehouses()
+        {
+
+            return await _Entities.WarehouseUnit.Where(wh => wh.IsAvailable == true).ToListAsync();
+
+        }
+
+
+        public async static Task<List<WarehouseUnit>> GetAllWarehouses()
+        {
+
+            return await _Entities.WarehouseUnit.ToListAsync();
+
+        }
+
+
     }
 }

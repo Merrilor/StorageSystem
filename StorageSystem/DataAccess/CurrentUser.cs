@@ -14,7 +14,7 @@ namespace StorageSystem.DataAccess
 
         public static int Id;
 
-        public static UserRole Role;
+        public static UserRole Role = UserRole.Manager;
 
 
     }
