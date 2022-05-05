@@ -409,6 +409,7 @@
       <DependentUpon>SettingsModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Settings\SettingsLoader.cs" />
+    <Compile Include="Style\StyleCreator.cs" />
     <Compile Include="Style\Themes\ColourfulDarkTheme.xaml.cs">
       <DependentUpon>ColourfulDarkTheme.xaml</DependentUpon>
     </Compile>
@@ -422,6 +423,9 @@
       <DependentUpon>LightTheme.xaml</DependentUpon>
     </Compile>
     <Compile Include="Style\Themes\ThemesController.cs" />
+    <Compile Include="Windows\ChangeWarehouseAmountWindow.xaml.cs">
+      <DependentUpon>ChangeWarehouseAmountWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\SettingsWindow.xaml.cs">
       <DependentUpon>SettingsWindow.xaml</DependentUpon>
     </Compile>
@@ -430,6 +434,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\WarehouseListPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\ChangeWarehouseAmountWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

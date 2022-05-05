@@ -1,5 +1,6 @@
 ﻿using StorageSystem.DataAccess;
 using StorageSystem.Model;
+using StorageSystem.Style;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -26,6 +27,8 @@ namespace StorageSystem.Pages
 
         public ObservableCollection<WarehouseUnit> _WarehouseList { get; set; } = new ObservableCollection<WarehouseUnit>();
 
+        private bool _EditMode = false;
+
 
         public WarehouseListPage()
         {
@@ -49,7 +52,6 @@ namespace StorageSystem.Pages
             {
 
                 AvaiabilityGridColumn.Visibility = Visibility.Collapsed;
-                ChangeAmountColumn.Visibility = Visibility.Collapsed;
 
             }
 
@@ -77,6 +79,47 @@ namespace StorageSystem.Pages
             WarehouseDatagrid.ItemsSource = _WarehouseList;
 
             Mouse.OverrideCursor = Cursors.Arrow;
+
+        }
+
+        private void EditButton_Click(object sender, RoutedEventArgs e)
+        {            
+
+            if (_EditMode)
+            {
+                EditButton.ClearValue(Button.BackgroundProperty);
+                _EditMode = false;
+
+                AmountColumn.IsReadOnly = true;
+                MinAmountColumn.IsReadOnly = true;
+
+                MinAmountColumn.ClearValue(DataGridColumn.HeaderStyleProperty);
+                AmountColumn.ClearValue(DataGridColumn.HeaderStyleProperty);
+                
+            }
+            else
+            {
+
+                EditButton.Background = Brushes.Goldenrod;
+                _EditMode = true;
+
+                AmountColumn.IsReadOnly = false;
+                MinAmountColumn.IsReadOnly = false;
+            
+                MinAmountColumn.HeaderStyle = StyleCreator.EditableGridHeader();
+                AmountColumn.HeaderStyle = StyleCreator.EditableGridHeader();
+                
+            }
+
+            
+            
+
+        }
+
+        private void WarehouseDatagrid_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
+        {
+
+            StorageDbOperations.SaveChanges();
 
         }
     }

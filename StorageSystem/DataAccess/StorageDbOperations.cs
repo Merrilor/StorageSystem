@@ -22,6 +22,15 @@ namespace StorageSystem.DataAccess
 
         }
 
+        public  static void SaveChanges()
+        {
+
+
+            _Entities.SaveChanges();
+
+
+        }
+
 
         public async static Task<bool> TryLoginUser(string login, string password)
         {
@@ -68,6 +77,14 @@ namespace StorageSystem.DataAccess
         {
 
             return await _Entities.WarehouseUnit.ToListAsync();
+
+        }
+
+        public async static Task<WarehouseUnit> GetWarehouseUnit(int id)
+        {
+
+            return await _Entities.WarehouseUnit.SingleAsync(wh => wh.WarehouseUnitId == id);
+
 
         }
 

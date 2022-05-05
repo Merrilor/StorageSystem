@@ -1,0 +1,35 @@
+﻿<Window x:Class="StorageSystem.Windows.ChangeWarehouseAmountWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:StorageSystem.Windows"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        Style="{DynamicResource CustomToolWindowStyle}"
+        Title="Количество на складе"
+        Height="200"
+        Width="300">
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <xctk:IntegerUpDown Margin="40,10"
+                            x:Name="NewAmountUpDown"
+                            Minimum="0" />
+
+        <Button Grid.Row="1"
+                Content="OK"
+                Style="{DynamicResource RoundedCorners}"
+                Width="100"
+                Height="50"
+                x:Name="SetAmountButton"
+                Click="SetAmountButton_Click" />
+
+
+    </Grid>
+</Window>
