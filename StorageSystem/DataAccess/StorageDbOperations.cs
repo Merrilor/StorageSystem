@@ -73,10 +73,10 @@ namespace StorageSystem.DataAccess
         }
 
 
-        public async static Task<List<WarehouseUnit>> GetAllWarehouses()
+        public static List<WarehouseUnit> GetAllWarehouses()
         {
 
-            return await _Entities.WarehouseUnit.ToListAsync();
+            return _Entities.WarehouseUnit.ToList();
 
         }
 

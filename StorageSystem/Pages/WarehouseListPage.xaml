@@ -8,7 +8,15 @@
       d:DesignHeight="450"
       d:DesignWidth="800"
       Background="{DynamicResource ControlBrightDefaultBackground}"
-      Title="WarehouseListPage">
+      Title="WarehouseListPage"
+      Loaded="Page_Loaded"
+      >
+
+    <Page.Resources>
+        <CollectionViewSource Source="{Binding WarehouseList}"
+                              IsLiveSortingRequested="True"
+                              x:Key="MyKey" />
+    </Page.Resources>
 
     <Grid>
 
@@ -41,6 +49,57 @@
 
         </StackPanel>
 
+
+        <Grid Grid.Column="1" Grid.Row="1" Margin="5">
+
+            <GroupBox   BorderThickness="2">
+
+                <GroupBox.Header>
+                    <TextBlock Text="Фильтрация" FontWeight="Bold" />
+                </GroupBox.Header>
+
+                <StackPanel Orientation="Vertical">
+
+
+                    <GroupBox x:Name="AvailabilityGroupBox" Header="Доступность" BorderThickness="0">
+
+                        <ComboBox x:Name="AvailabilityComboBox" SelectionChanged="AvailabilityComboBox_SelectionChanged" SelectedIndex="0">
+
+                            <ComboBoxItem Content="Все" />
+                            <ComboBoxItem Content="Доступен" />
+                            <ComboBoxItem Content="Не доступен" />
+
+                        </ComboBox>
+                        
+                    </GroupBox>
+
+                    <GroupBox Header="Количество"
+                              BorderThickness="0">
+
+                        <ComboBox x:Name="AmountComboBox" SelectionChanged="AmountComboBox_SelectionChanged" SelectedIndex="0">
+
+                            <ComboBoxItem Content="Все" />
+                            <ComboBoxItem Content="Меньше минимума" />
+                            <ComboBoxItem Content="Больше минимума" />
+
+                        </ComboBox>
+
+                    </GroupBox>
+
+
+                </StackPanel>
+                
+                
+
+
+            </GroupBox>
+            
+            
+            
+        </Grid>
+
+        
+
         <DataGrid x:Name="WarehouseDatagrid"
                   Grid.Row="1"
                   Margin="5"
@@ -52,7 +111,10 @@
                   CanUserReorderColumns="False"
                   CanUserResizeColumns="True"
                   CellEditEnding="WarehouseDatagrid_CellEditEnding"
+                  ItemsSource="{Binding Source={StaticResource MyKey}}"
                   >
+
+            
 
             <DataGrid.Columns>
 
@@ -64,6 +126,7 @@
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Image MaxWidth="80"
+                                   MaxHeight="80"
                                    Source="{Binding Product.FirstImagePath}" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
@@ -108,7 +171,8 @@
                 <DataGridCheckBoxColumn Header="Доступен?"
                                         Width="*"
                                         IsReadOnly="True"
-                                        x:Name="AvaiabilityGridColumn" />
+                                        Binding="{Binding IsAvailable,UpdateSourceTrigger=PropertyChanged}"
+                                        x:Name="AvailabilityGridColumn" />
 
 
 

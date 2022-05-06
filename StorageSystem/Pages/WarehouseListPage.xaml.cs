@@ -4,6 +4,7 @@ using StorageSystem.Style;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,7 +26,8 @@ namespace StorageSystem.Pages
     public partial class WarehouseListPage : Page
     {
 
-        public ObservableCollection<WarehouseUnit> _WarehouseList { get; set; } = new ObservableCollection<WarehouseUnit>();
+        public ObservableCollection<WarehouseUnit> WarehouseList { get; set; } = new ObservableCollection<WarehouseUnit>();
+
 
         private bool _EditMode = false;
 
@@ -34,13 +36,8 @@ namespace StorageSystem.Pages
         {
             InitializeComponent();
 
-            
-
-            ConfigurePage();
-            UpdateDatagrid();
-
-            
-
+            DataContext = this;
+           
         }
 
 
@@ -51,7 +48,7 @@ namespace StorageSystem.Pages
             if(CurrentUser.Role == UserRole.Employee)
             {
 
-                AvaiabilityGridColumn.Visibility = Visibility.Collapsed;
+                EditButton.Visibility = Visibility.Collapsed;
 
             }
 
@@ -59,28 +56,59 @@ namespace StorageSystem.Pages
 
         }
 
-        private async void UpdateDatagrid()
+        private void LoadDatagrid()
         {
 
+            if (AvailabilityComboBox is null || AmountComboBox is null || WarehouseDatagrid is null )
+                return;
+
             Mouse.OverrideCursor = Cursors.Wait;
+          
 
-            if (CurrentUser.Role == UserRole.Employee)
+            var items = StorageDbOperations.GetAllWarehouses();
+
+
+            switch (((ComboBoxItem)AvailabilityComboBox.SelectedItem).Content.ToString())
             {
-                _WarehouseList = new ObservableCollection<WarehouseUnit>(await StorageDbOperations.GetAvailableWarehouses());
+
+                case "Доступен":
+                    items = items.Where(w => w.IsAvailable == true).ToList();
+                    break;
+                case "Не доступен":
+                        items = items.Where(w => w.IsAvailable == false).ToList();
+                    break;
 
             }
-            else
+
+            switch (((ComboBoxItem)AmountComboBox.SelectedItem).Content.ToString())
             {
 
-                _WarehouseList = new ObservableCollection<WarehouseUnit>(await StorageDbOperations.GetAllWarehouses());
+                case "Меньше минимума":
+                    items = items.Where(w => w.Amount <= w.MinimalAmount).ToList();
+                    break;
+                case "Больше минимума":
+                    items = items.Where(w => w.Amount >= w.MinimalAmount).ToList();
+                    break;
 
             }
 
-            WarehouseDatagrid.ItemsSource = _WarehouseList;
+            WarehouseList.Clear();
+
+            foreach (var warehouse in  items)
+            {
+
+                WarehouseList.Add(warehouse);
+
+            }
+
+                                          
 
             Mouse.OverrideCursor = Cursors.Arrow;
 
         }
+
+
+       
 
         private void EditButton_Click(object sender, RoutedEventArgs e)
         {            
@@ -92,10 +120,12 @@ namespace StorageSystem.Pages
 
                 AmountColumn.IsReadOnly = true;
                 MinAmountColumn.IsReadOnly = true;
+                AvailabilityGridColumn.IsReadOnly = true;
 
                 MinAmountColumn.ClearValue(DataGridColumn.HeaderStyleProperty);
                 AmountColumn.ClearValue(DataGridColumn.HeaderStyleProperty);
-                
+                AvailabilityGridColumn.ClearValue(DataGridColumn.HeaderStyleProperty);
+
             }
             else
             {
@@ -105,14 +135,14 @@ namespace StorageSystem.Pages
 
                 AmountColumn.IsReadOnly = false;
                 MinAmountColumn.IsReadOnly = false;
-            
+                AvailabilityGridColumn.IsReadOnly = false;
+
+
                 MinAmountColumn.HeaderStyle = StyleCreator.EditableGridHeader();
                 AmountColumn.HeaderStyle = StyleCreator.EditableGridHeader();
-                
-            }
+                AvailabilityGridColumn.HeaderStyle = StyleCreator.EditableGridHeader();
 
-            
-            
+            }
 
         }
 
@@ -120,6 +150,24 @@ namespace StorageSystem.Pages
         {
 
             StorageDbOperations.SaveChanges();
+
+        }
+
+        private void AvailabilityComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            LoadDatagrid();
+        }
+
+        private void AmountComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            LoadDatagrid();
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            ConfigurePage();
+            LoadDatagrid();
+            WarehouseDatagrid.ItemsSource = WarehouseList;
 
         }
     }
