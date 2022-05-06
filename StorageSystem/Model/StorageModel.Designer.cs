@@ -1,4 +1,4 @@
-﻿// Создание кода T4 для модели "C:\Users\WSR\source\repos\StorageSystem\StorageSystem\Model\StorageModel.edmx" включено. 
+﻿// Создание кода T4 для модели "C:\Users\WSR\source\repos\ss4\StorageSystem4\StorageSystem\StorageSystem\Model\StorageModel.edmx" включено. 
 // Чтобы включить формирование кода прежних версий, измените значение свойства "Стратегия создания кода" конструктора
 // на "Legacy ObjectContext". Это свойство доступно в окне "Свойства", если модель
 // открыта в конструкторе.

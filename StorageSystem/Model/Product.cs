@@ -25,7 +25,7 @@ namespace StorageSystem.Model
         public int ProductId { get; set; }
         public string Title { get; set; }
         public string BrandName { get; set; }
-        public string Code { get; set; }
+        public Nullable<decimal> Code { get; set; }
         public string Barcode { get; set; }
         public int Weight { get; set; }
         public decimal DefaultPrice { get; set; }

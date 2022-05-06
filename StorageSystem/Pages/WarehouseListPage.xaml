@@ -8,9 +8,9 @@
       d:DesignHeight="450"
       d:DesignWidth="800"
       Background="{DynamicResource ControlBrightDefaultBackground}"
+      xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
       Title="WarehouseListPage"
-      Loaded="Page_Loaded"
-      >
+      Loaded="Page_Loaded">
 
     <Page.Resources>
         <CollectionViewSource Source="{Binding WarehouseList}"
@@ -38,45 +38,56 @@
                 Grid.Column="1"
                 Background="{DynamicResource ControlDarkerBackground}" />
 
-        <StackPanel Orientation="Horizontal" Grid.Column="1">
+        <StackPanel Orientation="Horizontal"
+                    Grid.Column="1">
 
             <Button x:Name="EditButton"
                     Width="30"
                     Height="30"
                     Style="{DynamicResource RoundedCorners}"
-                    Content="&#xf044;" FontFamily="{StaticResource FontAwesome}"
-                    Click="EditButton_Click"/>
+                    Content="&#xf044;"
+                    FontFamily="{StaticResource FontAwesome}"
+                    Click="EditButton_Click" />
 
         </StackPanel>
 
 
-        <Grid Grid.Column="1" Grid.Row="1" Margin="5">
+        <Grid Grid.Column="1"
+              Grid.Row="1"
+              Margin="5">
 
             <GroupBox   BorderThickness="2">
 
                 <GroupBox.Header>
-                    <TextBlock Text="Фильтрация" FontWeight="Bold" />
+                    <TextBlock Text="Фильтрация"
+                               FontWeight="Bold" />
                 </GroupBox.Header>
 
                 <StackPanel Orientation="Vertical">
 
 
-                    <GroupBox x:Name="AvailabilityGroupBox" Header="Доступность" BorderThickness="0">
+                    <GroupBox x:Name="AvailabilityGroupBox"
+                              Header="Доступность"
+                              BorderThickness="0">
 
-                        <ComboBox x:Name="AvailabilityComboBox" SelectionChanged="AvailabilityComboBox_SelectionChanged" SelectedIndex="0">
+                        <ComboBox x:Name="AvailabilityComboBox"
+                                  SelectionChanged="AvailabilityComboBox_SelectionChanged"
+                                  SelectedIndex="0">
 
                             <ComboBoxItem Content="Все" />
                             <ComboBoxItem Content="Доступен" />
                             <ComboBoxItem Content="Не доступен" />
 
                         </ComboBox>
-                        
+
                     </GroupBox>
 
                     <GroupBox Header="Количество"
                               BorderThickness="0">
 
-                        <ComboBox x:Name="AmountComboBox" SelectionChanged="AmountComboBox_SelectionChanged" SelectedIndex="0">
+                        <ComboBox x:Name="AmountComboBox"
+                                  SelectionChanged="AmountComboBox_SelectionChanged"
+                                  SelectedIndex="0">
 
                             <ComboBoxItem Content="Все" />
                             <ComboBoxItem Content="Меньше минимума" />
@@ -87,18 +98,54 @@
                     </GroupBox>
 
 
+                    <GroupBox Header="Код"
+                              BorderThickness="0">
+
+                        <StackPanel Orientation="Horizontal"
+                                    Margin="5,0,0,0">
+
+                            <TextBlock Text="От" />
+
+
+                            <xctk:IntegerUpDown x:Name="MinCodeUpDown"
+                                                Margin="10,0"
+                                                Text="1"
+                                                DefaultValue="1"
+                                                Minimum="1"
+                                                Maximum="10000" 
+                                                ClipValueToMinMax="True"
+                                                ValueChanged="MinCodeUpDown_ValueChanged"/>
+
+                            <TextBlock Text="До" />
+
+                            <xctk:IntegerUpDown x:Name="MaxCodeUpDown"
+                                                Margin="10,0"
+                                                DefaultValue="100"
+                                                Text="100"
+                                                Minimum="1"
+                                                Maximum="10000" 
+                                                ClipValueToMinMax="True"
+                                                ValueChanged="MaxCodeUpDown_ValueChanged"/>
+
+
+
+                        </StackPanel>
+
+                    </GroupBox>
+
+
                 </StackPanel>
-                
-                
+
+
 
 
             </GroupBox>
-            
-            
-            
+
+
+
         </Grid>
 
-        
+
 
         <DataGrid x:Name="WarehouseDatagrid"
                   Grid.Row="1"
@@ -111,10 +158,9 @@
                   CanUserReorderColumns="False"
                   CanUserResizeColumns="True"
                   CellEditEnding="WarehouseDatagrid_CellEditEnding"
-                  ItemsSource="{Binding Source={StaticResource MyKey}}"
-                  >
+                  ItemsSource="{Binding Source={StaticResource MyKey}}">
 
-            
+
 
             <DataGrid.Columns>
 
@@ -148,14 +194,13 @@
                                     Width="*"
                                     IsReadOnly="True"
                                     Binding="{Binding Amount,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                    x:Name="AmountColumn"
-                                    />
+                                    x:Name="AmountColumn" />
 
                 <DataGridTextColumn Header="Минимальное количество"
                                     Width="*"
                                     IsReadOnly="True"
-                                    Binding="{Binding MinimalAmount,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" 
-                                    x:Name="MinAmountColumn"/>
+                                    Binding="{Binding MinimalAmount,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                    x:Name="MinAmountColumn" />
 
                 <DataGridTextColumn Header="Цена за шт."
                                     Width="*"

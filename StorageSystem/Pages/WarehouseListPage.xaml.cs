@@ -56,7 +56,7 @@ namespace StorageSystem.Pages
 
         }
 
-        private void LoadDatagrid()
+        private async void LoadDatagrid()
         {
 
             if (AvailabilityComboBox is null || AmountComboBox is null || WarehouseDatagrid is null )
@@ -65,7 +65,9 @@ namespace StorageSystem.Pages
             Mouse.OverrideCursor = Cursors.Wait;
           
 
-            var items = StorageDbOperations.GetAllWarehouses();
+            var items = await StorageDbOperations.GetWarehouseRange((int)MinCodeUpDown.Value, (int)MaxCodeUpDown.Value);
+
+            
 
 
             switch (((ComboBoxItem)AvailabilityComboBox.SelectedItem).Content.ToString())
@@ -169,6 +171,16 @@ namespace StorageSystem.Pages
             LoadDatagrid();
             WarehouseDatagrid.ItemsSource = WarehouseList;
 
+        }
+
+        private void MinCodeUpDown_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+            LoadDatagrid();
+        }
+
+        private void MaxCodeUpDown_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+            LoadDatagrid();
         }
     }
 }

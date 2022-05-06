@@ -72,6 +72,17 @@ namespace StorageSystem.DataAccess
 
         }
 
+        public async static Task<List<WarehouseUnit>> GetWarehouseRange(int minCode, int maxCode)
+        {
+
+
+
+            return await _Entities.WarehouseUnit
+                .Where(wh => wh.Product.Code > minCode && wh.Product.Code < maxCode)
+                .ToListAsync();
+
+        }
+
 
         public static List<WarehouseUnit> GetAllWarehouses()
         {
