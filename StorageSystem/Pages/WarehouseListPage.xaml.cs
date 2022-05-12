@@ -53,7 +53,6 @@ namespace StorageSystem.Pages
             }
 
 
-
         }
 
         private async void LoadDatagrid()

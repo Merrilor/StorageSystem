@@ -213,6 +213,7 @@
           <Property Name="LastLoginDate" Type="datetime" />
           <Property Name="RegistrationDate" Type="datetime" Nullable="false" />
           <Property Name="RoleId" Type="int" Nullable="false" />
+          <Property Name="Photo" Type="nvarchar" MaxLength="300" />
         </EntityType>
         <EntityType Name="WarehouseUnit">
           <Key>
@@ -734,7 +735,7 @@
           <Property Name="ProductId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="BrandName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Code" Type="Decimal" />
+          <Property Name="Code" Type="Decimal" Precision="8" Scale="0" />
           <Property Name="Barcode" Type="String" MaxLength="13" FixedLength="false" Unicode="true" />
           <Property Name="Weight" Type="Int32" Nullable="false" />
           <Property Name="DefaultPrice" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
@@ -871,6 +872,7 @@
           <NavigationProperty Name="Employee" Relationship="Self.FK_Employee_User" FromRole="User" ToRole="Employee" />
           <NavigationProperty Name="LoginHistory" Relationship="Self.FK_LoginHistory_User" FromRole="User" ToRole="LoginHistory" />
           <NavigationProperty Name="Role" Relationship="Self.FK_User_Role" FromRole="User" ToRole="Role" />
+          <Property Name="Photo" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="WarehouseUnit">
           <Key>
@@ -1504,6 +1506,7 @@
           <EntitySetMapping Name="User">
             <EntityTypeMapping TypeName="StorageModel.User">
               <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="Login" ColumnName="Login" />
                 <ScalarProperty Name="Password" ColumnName="Password" />

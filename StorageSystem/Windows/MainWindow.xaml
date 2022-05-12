@@ -29,30 +29,36 @@
         <Grid Grid.ColumnSpan="2">
 
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="0.4*"/>
+                <ColumnDefinition Width="50"/>
                 <ColumnDefinition />
-                <ColumnDefinition />
-                <ColumnDefinition />
-                <ColumnDefinition />
+                <ColumnDefinition Width="50"/>
                 <ColumnDefinition Width="50" />
             </Grid.ColumnDefinitions>
 
 
-            <Border Grid.ColumnSpan="5"
+            <Border Grid.ColumnSpan="6"
                     BorderThickness="0 0 0 2"
                     Background="{DynamicResource ControlDarkerBackground}"
                     BorderBrush="{DynamicResource ContainerBorder}" />
 
+
             <Button Grid.Column="4"
+                    x:Name="ChangeThemeButton"
+                    FontFamily="{DynamicResource FontAwesome}"
+                    Content="&#xf186;"
+                    Margin="5"
+                    FontSize="25"
+                    Click="Button_Click" />
+
+            <Button Grid.Column="5"                  
                     Content="&#xf013;"
                     FontFamily="{DynamicResource FontAwesome}"
                     FontSize="25"
                     Margin="5" />
 
-            <Button Grid.Column="0"
-                    x:Name="ChangeThemeButton"
-                    Content="ChangeTheme"
-                    Margin="5"
-                    Click="Button_Click" />
+            
 
         </Grid>
 

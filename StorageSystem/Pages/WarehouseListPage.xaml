@@ -112,7 +112,8 @@
                                                 Text="1"
                                                 DefaultValue="1"
                                                 Minimum="1"
-                                                Maximum="10000" 
+                                                MaxLength="4"
+                                                Maximum="9999" 
                                                 ClipValueToMinMax="True"
                                                 ValueChanged="MinCodeUpDown_ValueChanged"/>
 
@@ -123,7 +124,8 @@
                                                 DefaultValue="100"
                                                 Text="100"
                                                 Minimum="1"
-                                                Maximum="10000" 
+                                                MaxLength="4"
+                                                Maximum="9999" 
                                                 ClipValueToMinMax="True"
                                                 ValueChanged="MaxCodeUpDown_ValueChanged"/>
 

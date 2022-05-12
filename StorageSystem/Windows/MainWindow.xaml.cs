@@ -37,11 +37,15 @@ namespace StorageSystem.Windows
             {
                 ThemesController.SetTheme(ThemesController.ThemeTypes.Light);
                 CurrentTheme = "Light";
+                ChangeThemeButton.Content = "&#xf186;";
+
             }
             else
             {
                 ThemesController.SetTheme(ThemesController.ThemeTypes.ColourfulDark);
                 CurrentTheme = "Dark";
+                ChangeThemeButton.Content = "&#xf185;";
+
             }
 
 
