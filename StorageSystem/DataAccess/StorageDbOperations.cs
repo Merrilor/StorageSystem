@@ -43,6 +43,10 @@ namespace StorageSystem.DataAccess
             CurrentUser.Id = user.UserId;
             CurrentUser.Login = user.Login;
             CurrentUser.Role = (UserRole)Enum.Parse(typeof(UserRole), user.Role.Name);
+            if(user.Photo != null)
+            {
+                CurrentUser.UserImagePath = user.Photo;
+            }
 
             var currentDate = await _Entities.Database.SqlQuery<DateTime>("SELECT getdate()").ToAsyncEnumerable().First();
 
@@ -61,6 +65,19 @@ namespace StorageSystem.DataAccess
 
             return true;
 
+
+        }
+
+        public static void LogoutUser()
+        {
+
+            var currentUser = _Entities.User.Single(u => u.UserId == CurrentUser.Id);
+
+            currentUser.LoginHistory.First().ExitDatetime = _Entities.Database.SqlQuery<DateTime>("SELECT getdate()").AsEnumerable().First();
+
+
+
+            SaveChanges();
 
         }
 
@@ -88,6 +105,14 @@ namespace StorageSystem.DataAccess
         {
 
             return _Entities.WarehouseUnit.ToList();
+
+        }
+
+        public async static Task<List<Role>> GetAllRoles()
+        {
+
+            return await _Entities.Role.ToListAsync();
+
 
         }
 

@@ -19,7 +19,12 @@ namespace StorageSystem.UserInteraction
 
         }
 
+        public static MessageBoxResult DisplayQuestion(string question)
+        {
 
+           return MessageBox.Show(question, "Уведомление", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+        }
 
 
 

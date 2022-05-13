@@ -29,11 +29,11 @@
         <Grid Grid.ColumnSpan="2">
 
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="50"/>
-                <ColumnDefinition Width="0.4*"/>
-                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="50" />
+                <ColumnDefinition Width="0.4*" />
+                <ColumnDefinition Width="50" />
                 <ColumnDefinition />
-                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="50" />
                 <ColumnDefinition Width="50" />
             </Grid.ColumnDefinitions>
 
@@ -43,27 +43,54 @@
                     Background="{DynamicResource ControlDarkerBackground}"
                     BorderBrush="{DynamicResource ContainerBorder}" />
 
+            <Border Grid.ColumnSpan="3" Background="{DynamicResource ControlBrightDefaultBackground}" />
+
+
+
+            <Border Margin="5">
+                <Image x:Name="UserImage"
+                       Margin="1" />
+
+
+            </Border>
+
+            <TextBlock x:Name="UserNameTextBlock"
+                       Grid.Column="1" 
+                       VerticalAlignment="Center"
+                       FontSize="20"
+                       Margin="10,0,0,0"
+                       />
+
+            <Button Grid.Column="2"
+                    x:Name="LogoutButton"
+                    FontFamily="{DynamicResource FontAwesome}"
+                    Content="&#xf2f5;"
+                    Margin="5"
+                    FontSize="20"
+                    Click="LogoutButton_Click" />
+
+
 
             <Button Grid.Column="4"
                     x:Name="ChangeThemeButton"
                     FontFamily="{DynamicResource FontAwesome}"
-                    Content="&#xf186;"
+                    Content="&#xf185;"
                     Margin="5"
                     FontSize="25"
-                    Click="Button_Click" />
+                    Click="ThemeButton_Click" />
 
-            <Button Grid.Column="5"                  
+            <Button Grid.Column="5"
                     Content="&#xf013;"
                     FontFamily="{DynamicResource FontAwesome}"
                     FontSize="25"
                     Margin="5" />
 
-            
+
 
         </Grid>
 
         <Grid Grid.Row="1"
-              Margin="0 -5 0 0"             
+              Margin="0 0 0 0"
               Background="{DynamicResource ControlDarkerBackground}">
 
             <Grid.RowDefinitions>

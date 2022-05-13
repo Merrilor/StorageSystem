@@ -1,4 +1,5 @@
-﻿using System;
+﻿using StorageSystem.DataAccess;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,22 @@ namespace StorageSystem.Pages
         public RegisterUserPage()
         {
             InitializeComponent();
+
+
+            LoadData();
+
+
         }
+
+
+        private async void LoadData()
+        {
+
+            UserRoleComboBox.ItemsSource = await StorageDbOperations.GetAllRoles();
+
+
+        }
+
+
     }
 }

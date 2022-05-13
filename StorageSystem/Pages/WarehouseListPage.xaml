@@ -158,7 +158,7 @@
                   CanUserDeleteRows="False"
                   CanUserResizeRows="False"
                   CanUserReorderColumns="False"
-                  CanUserResizeColumns="True"
+                  CanUserResizeColumns="True"                 
                   CellEditEnding="WarehouseDatagrid_CellEditEnding"
                   ItemsSource="{Binding Source={StaticResource MyKey}}">
 

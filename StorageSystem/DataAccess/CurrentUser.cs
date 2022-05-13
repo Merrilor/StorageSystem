@@ -14,7 +14,9 @@ namespace StorageSystem.DataAccess
 
         public static int Id;
 
-        public static UserRole Role = UserRole.Manager;
+        public static UserRole Role;
+
+        public static string UserImagePath = "/images/user/placeholderUser.jpg"; 
 
 
     }
