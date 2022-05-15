@@ -13,6 +13,8 @@ namespace StorageSystem.DataAccess
 
         private static StorageEntities _Entities;
 
+        private static bool _Loaded = false;
+       
 
         static StorageDbOperations()
         {
@@ -21,6 +23,7 @@ namespace StorageSystem.DataAccess
                 _Entities = new StorageEntities();
 
         }
+     
 
         public  static void SaveChanges()
         {
@@ -120,6 +123,16 @@ namespace StorageSystem.DataAccess
         {
 
             return await _Entities.WarehouseUnit.SingleAsync(wh => wh.WarehouseUnitId == id);
+
+
+        }
+
+        public async static Task<List<Product>> GetProductRange(int skip, int take)
+        {
+
+
+            return await _Entities.Product.OrderBy(p=> p.ProductId).Skip(skip).Take(take).ToListAsync();
+
 
 
         }

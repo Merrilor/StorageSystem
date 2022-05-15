@@ -39,11 +39,11 @@
 
 
             <Border Grid.ColumnSpan="6"
-                    
                     Background="{DynamicResource ControlDarkerBackground}"
                     BorderBrush="{DynamicResource ContainerBorder}" />
 
-            <Border Grid.ColumnSpan="3" Background="{DynamicResource ControlBrightDefaultBackground}" />
+            <Border Grid.ColumnSpan="3"
+                    Background="{DynamicResource ControlBrightDefaultBackground}" />
 
 
 
@@ -55,11 +55,10 @@
             </Border>
 
             <TextBlock x:Name="UserNameTextBlock"
-                       Grid.Column="1" 
+                       Grid.Column="1"
                        VerticalAlignment="Center"
                        FontSize="20"
-                       Margin="10,0,0,0"
-                       />
+                       Margin="10,0,0,0" />
 
             <Button Grid.Column="2"
                     x:Name="LogoutButton"
@@ -90,7 +89,6 @@
         </Grid>
 
         <Grid Grid.Row="1"
-              
               Background="{DynamicResource ControlDarkerBackground}">
 
             <Grid.RowDefinitions>
@@ -115,8 +113,10 @@
 
 
 
-                        <Button Content="Список товаров"
-                                Style="{DynamicResource LeftContentAligned}" />
+                        <Button x:Name="ProductListButton"
+                                Content="Список товаров"
+                                Style="{DynamicResource LeftContentAligned}"
+                                Click="ProductListButton_Click" />
 
                         <Button Content="Добавление товаров"
                                 Style="{DynamicResource LeftContentAligned}" />
@@ -215,12 +215,9 @@
         </Grid>
 
 
-        <Frame 
-           
-            Grid.Row="1"
+        <Frame Grid.Row="1"
                Grid.Column="1"
                x:Name="ContentFrame"
-               
                NavigationUIVisibility="Hidden">
 
 

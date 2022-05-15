@@ -29,8 +29,7 @@ namespace StorageSystem.Windows
 
         public MainWindow()
         {
-            InitializeComponent();
-
+            InitializeComponent();            
 
             ApplyUserInfo();
 
@@ -69,13 +68,17 @@ namespace StorageSystem.Windows
         }
 
         private void WarehouseListButton_Click(object sender, RoutedEventArgs e)
-        {
+        {           
             ContentFrame.Navigate(new WarehouseListPage());
+            AddButtonDelay(sender);
+
         }
 
         private void AddUserButton_Click(object sender, RoutedEventArgs e)
         {
             ContentFrame.Navigate(new RegisterUserPage());
+            AddButtonDelay(sender);
+
         }
 
         private void LogoutButton_Click(object sender, RoutedEventArgs e)
@@ -106,5 +109,27 @@ namespace StorageSystem.Windows
             }
 
         }
+
+        
+
+        private void ProductListButton_Click(object sender, RoutedEventArgs e)
+        {
+            ContentFrame.Navigate(new ProductListPage());
+            AddButtonDelay(sender);
+        }
+
+
+        private async void AddButtonDelay(object sender)
+        {
+
+            UIElement element = (UIElement)sender;
+
+            element.IsEnabled = false;
+            await Task.Delay(2000); 
+            element.IsEnabled = true;
+
+
+        }
+
     }
 }

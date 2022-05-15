@@ -28,6 +28,20 @@ namespace StorageSystem.Model
 
         }
 
+        public string CategoryNames
+        {
+
+            get                      
+            {
+
+                return string.Join(",", ProductCategory.Select(pc => pc.Category.Name));
+            
+            
+            
+            } 
+
+        }
+
 
     }
 }

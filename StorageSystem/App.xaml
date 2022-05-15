@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:StorageSystem"
              Exit="Application_Exit"
-             StartupUri="Windows/LoginWindow.xaml">
+             Startup="Application_Startup"
+             StartupUri="Windows/MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
