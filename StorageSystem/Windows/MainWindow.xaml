@@ -39,7 +39,7 @@
 
 
             <Border Grid.ColumnSpan="6"
-                    BorderThickness="0 0 0 2"
+                    
                     Background="{DynamicResource ControlDarkerBackground}"
                     BorderBrush="{DynamicResource ContainerBorder}" />
 
@@ -90,7 +90,7 @@
         </Grid>
 
         <Grid Grid.Row="1"
-              Margin="0 0 0 0"
+              
               Background="{DynamicResource ControlDarkerBackground}">
 
             <Grid.RowDefinitions>
@@ -215,10 +215,12 @@
         </Grid>
 
 
-        <Frame Grid.Row="1"
+        <Frame 
+           
+            Grid.Row="1"
                Grid.Column="1"
                x:Name="ContentFrame"
-               Margin="0 -5 0 0"
+               
                NavigationUIVisibility="Hidden">
 
 

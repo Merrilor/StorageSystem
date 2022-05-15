@@ -125,5 +125,18 @@ namespace StorageSystem.DataAccess
         }
 
 
+        public async static void AddNewUser(User newUser)
+        {
+
+            newUser.RegistrationDate = _Entities.Database.SqlQuery<DateTime>("SELECT getdate()").AsEnumerable().First();
+
+            _Entities.User.Add(newUser);
+
+            SaveChanges();
+
+
+        }
+
+
     }
 }

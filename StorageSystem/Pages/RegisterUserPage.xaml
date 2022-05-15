@@ -93,6 +93,7 @@
                         Margin="20,5"
                         Style="{DynamicResource RoundedCorners}"
                         Content="Изменить фото"
+                        Click="ChangeImageButton_Click"
                         />
 
 
@@ -107,7 +108,8 @@
                 Grid.Row="1"
                 Margin="20,5"
                 Content="Добавить"
-                Style="{DynamicResource RoundedCorners}" />
+                Style="{DynamicResource RoundedCorners}"
+                Click="AddUserButton_Click"/>
 
 
 

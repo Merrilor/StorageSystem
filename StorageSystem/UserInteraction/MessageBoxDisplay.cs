@@ -22,10 +22,17 @@ namespace StorageSystem.UserInteraction
         public static MessageBoxResult DisplayQuestion(string question)
         {
 
-           return MessageBox.Show(question, "Уведомление", MessageBoxButton.YesNo, MessageBoxImage.Question);
+           return MessageBox.Show(question, "Вопрос", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
         }
 
+        public static void DisplayNotification(string message)
+        {
+
+            MessageBox.Show(message, "Уведомление", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+
+
+        }
 
 
     }
