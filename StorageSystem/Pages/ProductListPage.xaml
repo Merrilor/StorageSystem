@@ -34,26 +34,169 @@
         <StackPanel Orientation="Horizontal"
                     Grid.Column="1">
 
+            <Button x:Name="AddNewProductButton"
+                    Width="30"
+                    Height="30"
+                    FontSize="25"
+                    Style="{DynamicResource RoundedCorners}"
+                    Content="&#xf0fe;"
+                    FontFamily="{StaticResource FontAwesome}"
+                    Click="AddNewProductButton_Click" />
+
 
         </StackPanel>
+
+        <Grid>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Margin="5"
+                        Orientation="Vertical">
+
+                <TextBlock Text="Поиск" />
+
+                <TextBox x:Name="SearchTextBox"
+                         MaxLength="20"
+                         Margin="0,5,0,0"
+                         Width="150"
+                         HorizontalAlignment="Left"
+                         Background="{DynamicResource ControlBrightDefaultBackground}"
+                         TextChanged="SearchTextBox_TextChanged" />
+
+            </StackPanel>
+
+
+        </Grid>
 
 
         <Grid Grid.Column="1"
               Grid.Row="1"
               Margin="5">
 
-            <GroupBox   BorderThickness="2">
+            <StackPanel Orientation="Vertical">
 
-                <GroupBox.Header>
-                    <TextBlock Text="Фильтрация"
-                               FontWeight="Bold" />
-                </GroupBox.Header>
+                <GroupBox   BorderThickness="2">
+
+                    <GroupBox.Header>
+                        <TextBlock Text="Фильтрация"
+                                   FontWeight="Bold" />
+                    </GroupBox.Header>
+
+
+                    <StackPanel Orientation="Vertical">
+
+
+                        <GroupBox Header="Бренд"
+                                  BorderThickness="0">
+
+                            <ComboBox x:Name="BrandComboBox"
+                                                                       
+                                       />
+
+                        </GroupBox>
+
+                        <GroupBox Header="Тип"
+                                  BorderThickness="0">
+
+                            <ComboBox x:Name="ProductTypeComboBox"
+                                      DisplayMemberPath="Name"
+                                      
+                                       />
+
+                        </GroupBox>
+
+                        <GroupBox Header="Код"
+                                  BorderThickness="0">
+
+                            <StackPanel Orientation="Horizontal"
+                                        Margin="5,0,0,0">
+
+                                <TextBlock Text="От" />
+
+
+                                <xctk:IntegerUpDown x:Name="MinCodeUpDown"
+                                                    Margin="10,0"
+                                                    Value="1"
+                                                    Minimum="1"
+                                                    MaxLength="4"
+                                                    Maximum="9999"
+                                                    ClipValueToMinMax="True"
+                                                     />
+
+                                <TextBlock Text="До" />
+
+                                <xctk:IntegerUpDown x:Name="MaxCodeUpDown"
+                                                    Margin="10,0"
+                                                    
+                                                    Value="100"
+                                                    Minimum="1"
+                                                    MaxLength="4"
+                                                    Maximum="9999"
+                                                    ClipValueToMinMax="True"
+                                                     />
 
 
 
+                            </StackPanel>
+
+                        </GroupBox>
+
+                    </StackPanel>
+                </GroupBox>
+
+                <GroupBox   BorderThickness="2">
+
+                    <GroupBox.Header>
+                        <TextBlock Text="Сортировка"
+                                   FontWeight="Bold" />
+                    </GroupBox.Header>
 
 
-            </GroupBox>
+                    <StackPanel Orientation="Vertical">
+
+
+                        <ComboBox x:Name="SortComboBox"
+                                  SelectedIndex="0"
+                                  SelectedValuePath="Content"
+                                  >
+
+                            <ComboBoxItem Content="Код(Стандарт)" />
+                            <ComboBoxItem Content="Вес" />
+                            <ComboBoxItem Content="Цена" />
+                            <ComboBoxItem Content="Скидка" />
+
+
+
+                        </ComboBox>
+
+                        <TextBlock Text="По"
+                                   HorizontalAlignment="Center" />
+
+                        <ComboBox x:Name="SortOrderComboBox"
+                                  
+                                  SelectedValuePath="Content"
+                                  >
+
+                            <ComboBoxItem Content="Возрастанию" />
+                            <ComboBoxItem Content="Убыванию" />
+
+
+                        </ComboBox>
+
+
+
+                    </StackPanel>
+
+
+                </GroupBox>
+
+            </StackPanel>
+
+
 
 
 
@@ -68,13 +211,7 @@
 
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <WrapPanel Width="{Binding (FrameworkElement.ActualWidth), 
-            RelativeSource={RelativeSource AncestorType=ScrollContentPresenter}}"
-                               ItemWidth="{Binding (ListView.View).ItemWidth, 
-            RelativeSource={RelativeSource AncestorType=ListView}}"
-                               MinWidth="{Binding ItemWidth, RelativeSource={RelativeSource Self}}"
-                               ItemHeight="{Binding (ListView.View).ItemHeight, 
-            RelativeSource={RelativeSource AncestorType=ListView}}" />
+                    <WrapPanel />
                 </ItemsPanelTemplate>
 
             </ItemsControl.ItemsPanel>
@@ -127,7 +264,6 @@
                                Grid.ColumnSpan="2"
                                Grid.RowSpan="2"
                                HorizontalAlignment="Left"
-                               
                                Margin="10,0,0,0" />
 
                         <TextBlock Grid.Row="1"

@@ -21,7 +21,7 @@ namespace StorageSystem.Model
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        {
+        {            
             throw new UnintentionalCodeFirstException();
         }
     

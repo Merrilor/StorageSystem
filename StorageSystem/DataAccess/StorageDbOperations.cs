@@ -127,11 +127,11 @@ namespace StorageSystem.DataAccess
 
         }
 
-        public async static Task<List<Product>> GetProductRange(int skip, int take)
+        public static IQueryable<Product> GetProductRange(int minCode, int maxCode)
         {
 
 
-            return await _Entities.Product.OrderBy(p=> p.ProductId).Skip(skip).Take(take).ToListAsync();
+            return _Entities.Product.Where(p => p.Code >= minCode && p.Code <= maxCode);
 
 
 
@@ -147,6 +147,21 @@ namespace StorageSystem.DataAccess
 
             SaveChanges();
 
+
+        }
+
+        public async static Task< List<string>> GetAllBrands()
+        {
+
+            return await _Entities.Product.Select(p => p.BrandName).Distinct().ToListAsync();
+
+
+        }
+
+        public async static Task<List<ProductType>> GetAllProductTypes()
+        {
+
+            return await _Entities.ProductType.ToListAsync();
 
         }
 
