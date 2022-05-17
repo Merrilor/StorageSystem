@@ -131,5 +131,11 @@ namespace StorageSystem.Windows
 
         }
 
+        private void AddProductButton_Click(object sender, RoutedEventArgs e)
+        {
+            ContentFrame.Navigate(new AddEditProductPage());
+            AddButtonDelay(sender);
+            AddButtonDelay(ProductListButton);
+        }
     }
 }

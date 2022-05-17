@@ -33,6 +33,47 @@ namespace StorageSystem.Pages
         {
             InitializeComponent();
            
+        }
+
+        private async void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            await LoadFilterValues();
+            await UpdateListView();
+
+            MinCodeUpDown.ValueChanged += CodeUpDown_ValueChanged;
+            MaxCodeUpDown.ValueChanged += CodeUpDown_ValueChanged;
+            SortComboBox.SelectionChanged += Filter_Changed;
+            SortOrderComboBox.SelectionChanged += Filter_Changed;
+            BrandComboBox.SelectionChanged += Filter_Changed;
+            ProductTypeComboBox.SelectionChanged += Filter_Changed;
+
+
+
+            ProductListView.ItemsSource = ProductList;
+        }
+
+        private async Task LoadFilterValues()
+        {
+
+            var brands = await StorageDbOperations.GetAllBrands();
+            brands.Insert(0, "Все");
+            BrandComboBox.ItemsSource = brands;
+            BrandComboBox.SelectedIndex = 0;
+
+            var productTypes = await StorageDbOperations.GetAllProductTypes();
+            productTypes.Insert(0, new ProductType { Name = "Все" });
+            ProductTypeComboBox.ItemsSource = productTypes;
+            ProductTypeComboBox.SelectedIndex = 0;
+
+            SortComboBox.SelectedIndex = 0;
+            SortOrderComboBox.SelectedIndex = 0;
+
+            MinCodeUpDown.Text = "1";
+            MinCodeUpDown.DefaultValue = 1;
+
+
+            MaxCodeUpDown.Text = "100";
+            MaxCodeUpDown.DefaultValue = 100;
 
         }
 
@@ -131,64 +172,8 @@ namespace StorageSystem.Pages
 
 
         }
+       
 
-
-        private void ProductEditButton_Click(object sender, RoutedEventArgs e)
-        {
-            
-        }
-
-        private async void Page_Loaded(object sender, RoutedEventArgs e)
-        {
-            await LoadFilterValues();
-            await UpdateListView();
-
-            MinCodeUpDown.ValueChanged += CodeUpDown_ValueChanged;
-            MaxCodeUpDown.ValueChanged += CodeUpDown_ValueChanged;
-            SortComboBox.SelectionChanged += Filter_Changed;
-            SortOrderComboBox.SelectionChanged += Filter_Changed;
-            BrandComboBox.SelectionChanged += Filter_Changed;
-            ProductTypeComboBox.SelectionChanged += Filter_Changed;
-
-
-
-            ProductListView.ItemsSource = ProductList;
-        }
-
-
-
-        private async Task LoadFilterValues()
-        {
-
-            var brands = await StorageDbOperations.GetAllBrands();
-            brands.Insert(0, "Все");
-            BrandComboBox.ItemsSource = brands;
-            BrandComboBox.SelectedIndex = 0;
-
-            var productTypes = await StorageDbOperations.GetAllProductTypes();
-            productTypes.Insert(0, new ProductType { Name = "Все" });            
-            ProductTypeComboBox.ItemsSource = productTypes;
-            ProductTypeComboBox.SelectedIndex = 0;
-
-
-            SortComboBox.SelectedIndex = 0;
-            SortOrderComboBox.SelectedIndex = 0;
-
-            MinCodeUpDown.Text = "1";
-            MinCodeUpDown.DefaultValue = 1;
-
-
-            MaxCodeUpDown.Text = "100";
-            MaxCodeUpDown.DefaultValue = 100;
-
-
-           
-
-        }
-
-        
-
-        
 
         private async void CodeUpDown_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
@@ -208,6 +193,15 @@ namespace StorageSystem.Pages
 
         private void AddNewProductButton_Click(object sender, RoutedEventArgs e)
         {
+            NavigationService.Navigate(new AddEditProductPage());
+        }
+
+        private void ProductEditButton_Click(object sender, RoutedEventArgs e)
+        {
+            var button = sender as Button;
+            int productId = Convert.ToInt32(button.Tag);
+
+            NavigationService.Navigate(new AddEditProductPage(productId));
 
         }
     }

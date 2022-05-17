@@ -74,6 +74,9 @@ namespace StorageSystem.DataAccess
         public static void LogoutUser()
         {
 
+            if (CurrentUser.Id == 0)
+                return;
+
             var currentUser = _Entities.User.Single(u => u.UserId == CurrentUser.Id);
 
             currentUser.LoginHistory.First().ExitDatetime = _Entities.Database.SqlQuery<DateTime>("SELECT getdate()").AsEnumerable().First();
@@ -163,6 +166,11 @@ namespace StorageSystem.DataAccess
 
             return await _Entities.ProductType.ToListAsync();
 
+        }
+
+        public  static Product GetLastProduct()
+        {
+            return  _Entities.Product.OrderByDescending(p=> p.Code).First();
         }
 
 

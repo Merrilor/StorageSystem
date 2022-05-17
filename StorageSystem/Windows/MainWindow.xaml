@@ -118,8 +118,12 @@
                                 Style="{DynamicResource LeftContentAligned}"
                                 Click="ProductListButton_Click" />
 
-                        <Button Content="Добавление товаров"
-                                Style="{DynamicResource LeftContentAligned}" />
+                        <Button 
+                            x:Name="AddProductButton"
+                            Content="Добавление товаров"
+                                Style="{DynamicResource LeftContentAligned}" 
+                            Click="AddProductButton_Click"
+                            />
 
                         <Button Content="Добавление категорий"
                                 Style="{DynamicResource LeftContentAligned}" />

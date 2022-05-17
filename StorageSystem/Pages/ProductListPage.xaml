@@ -40,6 +40,7 @@
                     FontSize="25"
                     Style="{DynamicResource RoundedCorners}"
                     Content="&#xf0fe;"
+                    Foreground="Green"
                     FontFamily="{StaticResource FontAwesome}"
                     Click="AddNewProductButton_Click" />
 

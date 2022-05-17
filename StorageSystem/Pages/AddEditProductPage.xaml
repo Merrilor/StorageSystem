@@ -1,0 +1,358 @@
+﻿<Page x:Class="StorageSystem.Pages.AddEditProductPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="clr-namespace:StorageSystem.Pages"
+      mc:Ignorable="d"
+      d:DesignHeight="450"
+      d:DesignWidth="800"
+      xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+      Loaded="Page_Loaded"
+      Title="AddEditProductPage">
+
+    <Grid Margin="5">
+
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+
+
+        <Grid>
+
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="75"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+
+            <StackPanel Margin="5">
+
+                <TextBlock Text="Название" />
+
+                <TextBox  x:Name="ProductTitleTextBox"
+                          HorizontalContentAlignment="Left"
+                          VerticalContentAlignment="Center"
+                          MaxLength="40"
+                          Margin="0 5 0 0"
+                          MinHeight="35"
+                          MaxHeight="50" />
+
+
+            </StackPanel>
+
+            <StackPanel Margin="5"
+                        Grid.Row="1">
+
+                <TextBlock Text="Бренд" />
+
+                <TextBox  x:Name="ProductBrandTextBox"
+                          HorizontalContentAlignment="Left"
+                          VerticalContentAlignment="Center"
+                          MaxLength="40"
+                          Margin="0 5 0 0"
+                          MinHeight="35"
+                          MaxHeight="50" />
+
+
+            </StackPanel>
+
+            <StackPanel Margin="5"
+                        Grid.Row="2">
+
+                <TextBlock Text="Код" />
+
+                <TextBox  x:Name="ProductCodeTextBox"
+                          HorizontalContentAlignment="Left"
+                          VerticalContentAlignment="Center"
+                          MaxLength="40"
+                          Margin="0 5 0 0"
+                          MinHeight="35"
+                          IsReadOnly="True"
+                          MaxHeight="50" />
+
+                
+            </StackPanel>
+
+            <StackPanel Margin="5"
+                        Grid.Row="3">
+
+                <TextBlock Text="Штрихкод" />
+
+                <TextBox  x:Name="ProductBarcodeTextBox"
+                          HorizontalContentAlignment="Left"
+                          VerticalContentAlignment="Center"
+                          MaxLength="13"
+                          Margin="0 5 0 0"
+                          MinHeight="35"
+                          MaxHeight="50" 
+                          PreviewKeyDown="NumberTextBox_PreviewKeyDown"
+                          />
+
+
+            </StackPanel>
+
+            <StackPanel Margin="5"
+                        Grid.Row="4">
+
+                <TextBlock Text="Вес(грамм)" />
+
+                <TextBox  x:Name="ProductWeightTextBox"
+                          HorizontalContentAlignment="Left"
+                          VerticalContentAlignment="Center"
+                          MaxLength="5"
+                          Margin="0 5 0 0"
+                          MinHeight="35"
+                          MaxHeight="50"
+                          PreviewKeyDown="NumberTextBox_PreviewKeyDown"/>
+
+
+            </StackPanel>
+
+            <GroupBox Grid.Row="5"
+                      Grid.ColumnSpan="2"
+                      Grid.RowSpan="2"
+                      Background="{DynamicResource ControlBrightDefaultBackground}"
+                      Header="Цена">
+
+
+                <Grid>
+
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition Height="0.5*" />
+                    </Grid.RowDefinitions>
+
+                    <StackPanel Margin="5"
+                                Grid.Row="0">
+
+                        <TextBlock Text="Стандартная цена(руб)" />
+
+                        <TextBox  x:Name="DefaultPriceTextBox"
+                                  HorizontalContentAlignment="Left"
+                                  VerticalContentAlignment="Center"
+                                  HorizontalAlignment="Left"
+                                  Width="120"
+                                  MaxLength="6"
+                                  Margin="0 5 0 0"
+                                  MinHeight="25"
+                                  MaxHeight="50" 
+                                  TextChanged="UpdateTotalPrice"
+                                  PreviewKeyDown="DefaultPriceTextBox_PreviewKeyDown"
+                                  />
+
+
+                    </StackPanel>
+
+                    <StackPanel Margin="5"
+                                Grid.Column="1">
+
+                        <TextBlock Text="Процент скидки" />
+
+                        <TextBox  x:Name="DiscountTextBox"
+                                  HorizontalContentAlignment="Left"
+                                  VerticalContentAlignment="Center"
+                                  MaxLength="2"
+                                  Width="50"
+                                  HorizontalAlignment="Left"
+                                  Margin="0 5 0 0"
+                                  MinHeight="25"
+                                  MaxHeight="50"
+                                  TextChanged="UpdateTotalPrice"
+                                  PreviewKeyDown="NumberTextBox_PreviewKeyDown"/>
+
+
+                    </StackPanel>
+
+                    <StackPanel Margin="5"
+                                Grid.Row="1"
+                                Grid.ColumnSpan="2"
+                                VerticalAlignment="Center"
+                                Orientation="Horizontal">
+
+                        <TextBlock Text="Итоговая цена:" />
+
+                        <TextBlock Margin="5,0,0,0" x:Name="TotalPriceTextBlock"  Text="0 руб"/>
+
+
+                    </StackPanel>
+
+
+
+                </Grid>
+            </GroupBox>
+
+
+            <GroupBox Grid.RowSpan="4"
+                      Grid.Column="1"
+                      Header="Изображения"
+                      Background="{DynamicResource ControlBrightDefaultBackground}">
+
+                <Grid >
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition Height="0.2*"/>
+                    </Grid.RowDefinitions>
+
+                    <ListView x:Name="ImageListView"
+                              MinHeight="150">
+
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+
+
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition />
+                                        <ColumnDefinition />
+                                    </Grid.ColumnDefinitions>
+
+
+                                    <Image Source="{Binding FullImagePath}" />
+
+                                    <TextBlock Text="{Binding ImageName}" />
+
+                                </Grid>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+
+
+                    </ListView>
+
+
+                    <StackPanel Orientation="Horizontal"
+                                Margin="0,10,0,0"
+                                Grid.Row="1">
+
+                        <Button x:Name="AddImageButton"
+                                Width="30"
+                                Height="30"
+                                FontSize="25"
+                                Style="{DynamicResource RoundedCorners}"
+                                Content="&#xf0fe;"
+                                
+                                FontFamily="{StaticResource FontAwesome}"
+                                Click="AddImageButton_Click" />
+
+                        <Button x:Name="EditImageButton"
+                                Width="30"
+                                Height="30"
+                                Style="{DynamicResource RoundedCorners}"
+                                Content="&#xf044;"
+                                Margin="10,0,0,0"
+                                FontFamily="{StaticResource FontAwesome}"
+                                Click="EditImageButton_Click" />
+
+                        <Button x:Name="DeleteImageButton"
+                                Width="30"
+                                Height="30"
+                                Style="{DynamicResource RoundedCorners}"
+                                Content="&#xf2ed;"
+                                Margin="10,0,0,0"
+                                
+                                FontFamily="{StaticResource FontAwesome}"
+                                Click="DeleteImageButton_Click" />
+
+
+                    </StackPanel>
+
+
+                </Grid>
+
+
+
+            </GroupBox>
+
+
+        </Grid>
+
+        <Grid Grid.Column="1">
+
+
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition Height="50"/>
+            </Grid.RowDefinitions>
+
+            <StackPanel Margin="5"
+                        Grid.Row="0"
+                        Grid.ColumnSpan="2"
+                        VerticalAlignment="Center"
+                        Orientation="Vertical">
+
+                <TextBlock Text="Тип продукции" />
+
+                <ComboBox x:Name="ProductTypeComboBox"
+                          Margin="0,5,0,0"
+                          Width="200"
+                          Height="30"
+                          HorizontalAlignment="Left" 
+                          DisplayMemberPath="Name"
+                          
+                          />
+
+
+            </StackPanel>
+
+            <GroupBox Grid.Row="1"
+                      Header="Категории"
+                      Margin="5"
+                      Background="{DynamicResource ControlBrightDefaultBackground}"
+                      Grid.RowSpan="5">
+
+
+
+                
+
+
+            </GroupBox>
+
+            <Grid Grid.Row="6">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+
+
+                <Button Grid.Column="1"
+                        x:Name="AddEditProductButton"
+                        Margin="10"
+                        Style="{DynamicResource RoundedCorners}"
+                        Content="Добавить продукт"
+                        Background="Green" 
+                        Click="AddEditProductButton_Click"/>
+
+
+            </Grid>
+
+        </Grid>
+
+
+    </Grid>
+</Page>
