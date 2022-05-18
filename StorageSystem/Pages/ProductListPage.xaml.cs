@@ -25,8 +25,10 @@ namespace StorageSystem.Pages
     public partial class ProductListPage : Page
     {
 
+        private bool _IsLoaded;
 
         public ObservableCollection<Product> ProductList { get; set; } = new ObservableCollection<Product>();
+
 
 
         public ProductListPage()
@@ -37,6 +39,14 @@ namespace StorageSystem.Pages
 
         private async void Page_Loaded(object sender, RoutedEventArgs e)
         {
+
+            if (_IsLoaded)
+            {
+                await UpdateListView();
+                return;
+            }
+                
+
             await LoadFilterValues();
             await UpdateListView();
 
@@ -50,6 +60,9 @@ namespace StorageSystem.Pages
 
 
             ProductListView.ItemsSource = ProductList;
+
+            _IsLoaded = true;
+
         }
 
         private async Task LoadFilterValues()
@@ -81,13 +94,13 @@ namespace StorageSystem.Pages
         {
 
 
-            var products =  StorageDbOperations.GetProductRange((int)MinCodeUpDown.Value, (int)MaxCodeUpDown.Value);
+            var products = await StorageDbOperations.GetProductRange((int)MinCodeUpDown.Value, (int)MaxCodeUpDown.Value);
           
 
             if(BrandComboBox.SelectedValue.ToString() != "Все")
             {
 
-                products = products.Where(p => p.BrandName == BrandComboBox.SelectedValue.ToString());
+                products = products.Where(p => p.BrandName == BrandComboBox.SelectedValue.ToString()).ToList();
 
             }
            
@@ -100,7 +113,7 @@ namespace StorageSystem.Pages
             if (selectedProductType.Name != "Все" )
             {
 
-                products = products.Where(p => p.ProductType.Name == selectedProductType.Name);
+                products = products.Where(p => p.ProductType.Name == selectedProductType.Name).ToList();
 
             }          
 
@@ -113,17 +126,17 @@ namespace StorageSystem.Pages
                 {
 
                     case "Код(Стандарт)":
-                        products = products.OrderBy(p => p.Code);
+                        products = products.OrderBy(p => p.Code).ToList();
                         break;
 
                     case "Вес":
-                        products = products.OrderBy(p => p.Weight);
+                        products = products.OrderBy(p => p.Weight).ToList();
                         break;
                     case "Цена":
-                        products = products.OrderBy(p => p.DefaultPrice);
+                        products = products.OrderBy(p => p.DefaultPrice).ToList();
                         break;
                     case "Скидка":
-                        products = products.OrderBy(p => p.DiscountPercent);
+                        products = products.OrderBy(p => p.DiscountPercent).ToList();
                         break;
 
                 }
@@ -137,17 +150,17 @@ namespace StorageSystem.Pages
                 {
 
                     case "Код(Стандарт)":
-                        products = products.OrderByDescending(p => p.Code);
+                        products = products.OrderByDescending(p => p.Code).ToList();
                         break;
 
                     case "Вес":
-                        products = products.OrderByDescending(p => p.Weight);
+                        products = products.OrderByDescending(p => p.Weight).ToList();
                         break;
                     case "Цена":
-                        products = products.OrderByDescending(p => p.DefaultPrice);
+                        products = products.OrderByDescending(p => p.DefaultPrice).ToList();
                         break;
                     case "Скидка":
-                        products = products.OrderByDescending(p => p.DiscountPercent);
+                        products = products.OrderByDescending(p => p.DiscountPercent).ToList();
                         break;
 
                 }
@@ -158,11 +171,11 @@ namespace StorageSystem.Pages
             if(SearchTextBox.Text.Length > 1)
             {
                 var searchQuery = SearchTextBox.Text.ToLower();
-                products = products.Where(p => p.Title.ToLower().Contains( searchQuery) || p.Code.ToString().Contains( searchQuery));
+                products = products.Where(p => p.Title.ToLower().Contains( searchQuery) || p.Code.ToString().Contains( searchQuery)).ToList();
 
             }
 
-            var productList = await products.ToListAsync();
+            var productList =  products.ToList();
 
             ProductList.Clear();
             foreach (var product in productList)

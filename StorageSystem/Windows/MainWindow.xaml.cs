@@ -70,14 +70,16 @@ namespace StorageSystem.Windows
         private void WarehouseListButton_Click(object sender, RoutedEventArgs e)
         {           
             ContentFrame.Navigate(new WarehouseListPage());
-            AddButtonDelay(sender);
+            AddButtonDelay();
+
 
         }
 
         private void AddUserButton_Click(object sender, RoutedEventArgs e)
         {
             ContentFrame.Navigate(new RegisterUserPage());
-            AddButtonDelay(sender);
+            AddButtonDelay();
+
 
         }
 
@@ -115,7 +117,8 @@ namespace StorageSystem.Windows
         private void ProductListButton_Click(object sender, RoutedEventArgs e)
         {
             ContentFrame.Navigate(new ProductListPage());
-            AddButtonDelay(sender);
+            AddButtonDelay();
+
         }
 
 
@@ -125,17 +128,24 @@ namespace StorageSystem.Windows
             UIElement element = (UIElement)sender;
 
             element.IsEnabled = false;
-            await Task.Delay(2000); 
+            await Task.Delay(1500); 
             element.IsEnabled = true;
 
 
+        }
+        private async void AddButtonDelay()
+        {
+
+            MenuStackPanel.IsEnabled = false;
+            await Task.Delay(1500);
+            MenuStackPanel.IsEnabled = true;
         }
 
         private void AddProductButton_Click(object sender, RoutedEventArgs e)
         {
             ContentFrame.Navigate(new AddEditProductPage());
-            AddButtonDelay(sender);
-            AddButtonDelay(ProductListButton);
+            AddButtonDelay();
+         
         }
     }
 }

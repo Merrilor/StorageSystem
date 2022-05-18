@@ -9,6 +9,7 @@
       d:DesignWidth="800"
       xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
       Loaded="Page_Loaded"
+      KeepAlive="True"
       Title="ProductListPage">
 
     <Grid>
@@ -94,9 +95,7 @@
                         <GroupBox Header="Бренд"
                                   BorderThickness="0">
 
-                            <ComboBox x:Name="BrandComboBox"
-                                                                       
-                                       />
+                            <ComboBox x:Name="BrandComboBox" />
 
                         </GroupBox>
 
@@ -104,9 +103,7 @@
                                   BorderThickness="0">
 
                             <ComboBox x:Name="ProductTypeComboBox"
-                                      DisplayMemberPath="Name"
-                                      
-                                       />
+                                      DisplayMemberPath="Name" />
 
                         </GroupBox>
 
@@ -125,20 +122,17 @@
                                                     Minimum="1"
                                                     MaxLength="4"
                                                     Maximum="9999"
-                                                    ClipValueToMinMax="True"
-                                                     />
+                                                    ClipValueToMinMax="True" />
 
                                 <TextBlock Text="До" />
 
                                 <xctk:IntegerUpDown x:Name="MaxCodeUpDown"
                                                     Margin="10,0"
-                                                    
                                                     Value="100"
                                                     Minimum="1"
                                                     MaxLength="4"
                                                     Maximum="9999"
-                                                    ClipValueToMinMax="True"
-                                                     />
+                                                    ClipValueToMinMax="True" />
 
 
 
@@ -162,8 +156,7 @@
 
                         <ComboBox x:Name="SortComboBox"
                                   SelectedIndex="0"
-                                  SelectedValuePath="Content"
-                                  >
+                                  SelectedValuePath="Content">
 
                             <ComboBoxItem Content="Код(Стандарт)" />
                             <ComboBoxItem Content="Вес" />
@@ -178,9 +171,7 @@
                                    HorizontalAlignment="Center" />
 
                         <ComboBox x:Name="SortOrderComboBox"
-                                  
-                                  SelectedValuePath="Content"
-                                  >
+                                  SelectedValuePath="Content">
 
                             <ComboBoxItem Content="Возрастанию" />
                             <ComboBoxItem Content="Убыванию" />
@@ -203,135 +194,137 @@
 
         </Grid>
 
+        <ScrollViewer Grid.Row="1">
+            <ItemsControl x:Name="ProductListView"
+                          HorizontalContentAlignment="Center"
+                          VerticalContentAlignment="Center"
+                          ScrollViewer.HorizontalScrollBarVisibility="Disabled">
 
-        <ItemsControl Grid.Row="1"
-                      x:Name="ProductListView"
-                      HorizontalContentAlignment="Center"
-                      VerticalContentAlignment="Center"
-                      ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel />
+                    </ItemsPanelTemplate>
 
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <WrapPanel />
-                </ItemsPanelTemplate>
-
-            </ItemsControl.ItemsPanel>
-
-
-
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-
-
-                    <Grid Height="200"
-                          Width="300"
-                          Background="{DynamicResource ControlBrightDefaultBorderBrush}"
-                          Margin="10">
-
-                        <Grid.RowDefinitions>
-                            <RowDefinition />
-                            <RowDefinition />
-                            <RowDefinition />
-                            <RowDefinition />
-                            <RowDefinition />
-                        </Grid.RowDefinitions>
-
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition />
-                            <ColumnDefinition />
-                            <ColumnDefinition />
-                            <ColumnDefinition />
-                        </Grid.ColumnDefinitions>
+                </ItemsControl.ItemsPanel>
 
 
 
-                        <TextBlock TextWrapping="Wrap"
-                                   HorizontalAlignment="Center"
-                                   VerticalAlignment="Center"
-                                   Grid.ColumnSpan="4">
-
-                            <TextBlock.Text>
-                                <MultiBinding StringFormat="{} {0} - {1}">
-                                    <Binding Path="Title" />
-                                    <Binding Path="BrandName" />
-                                </MultiBinding>
-                            </TextBlock.Text>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
 
 
-                        </TextBlock>
+                        <Grid Height="200"
+                              Width="300"
+                              Background="{DynamicResource ControlBrightDefaultBorderBrush}"
+                              Margin="10">
 
-                        <Image Source="{Binding FirstImagePath}"
-                               Grid.Row="1"
-                               Grid.ColumnSpan="2"
-                               Grid.RowSpan="2"
-                               HorizontalAlignment="Left"
-                               Margin="10,0,0,0" />
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
 
-                        <TextBlock Grid.Row="1"
-                                   Grid.Column="2"
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+
+
+
+                            <TextBlock TextWrapping="Wrap"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       Grid.ColumnSpan="4">
+
+                                <TextBlock.Text>
+                                    <MultiBinding StringFormat="{}{0}-{1}">
+                                        <Binding Path="Title" />
+                                        <Binding Path="BrandName" />
+                                    </MultiBinding>
+                                </TextBlock.Text>
+
+
+                            </TextBlock>
+
+                            <Image Source="{Binding FirstImagePath}"
+                                   Grid.Row="1"
                                    Grid.ColumnSpan="2"
-                                   TextWrapping="Wrap">
+                                   Grid.RowSpan="2"
+                                   HorizontalAlignment="Left"
+                                   Margin="10,0,0,0" />
+
+                            <TextBlock Grid.Row="1"
+                                       Grid.Column="2"
+                                       Grid.ColumnSpan="2"
+                                       TextWrapping="Wrap">
 
 
-                            <TextBlock.Text>
-                                <MultiBinding StringFormat="{}Код/Штрихкод: {0}/{1}">
-                                    <Binding Path="Code" />
-                                    <Binding Path="Barcode" />
-                                </MultiBinding>
-                            </TextBlock.Text>
+                                <TextBlock.Text>
+                                    <MultiBinding StringFormat="{}Код/Штрихкод: {0}/{1}">
+                                        <Binding Path="Code" />
+                                        <Binding Path="Barcode" />
+                                    </MultiBinding>
+                                </TextBlock.Text>
 
 
-                        </TextBlock>
+                            </TextBlock>
 
-                        <TextBlock Grid.Row="2"
-                                   Grid.Column="2"
-                                   Grid.ColumnSpan="2"
-                                   Text="{Binding Weight, StringFormat='{}Вес: {0} грамм.'}" />
+                            <TextBlock Grid.Row="2"
+                                       Grid.Column="2"
+                                       Grid.ColumnSpan="2"
+                                       Text="{Binding Weight, StringFormat='{}Вес: {0} грамм.'}" />
 
-                        <TextBlock Grid.Row="3"
-                                   Grid.ColumnSpan="4"
-                                   Text="{Binding CategoryNames, StringFormat='{}Категории: {0}'}"
-                                   TextWrapping="Wrap"
-                                   Margin="10,2,0,0" />
-
-
-                        <TextBlock Grid.Row="4"
-                                   Grid.Column="0"
-                                   Grid.ColumnSpan="2"
-                                   VerticalAlignment="Center"
-                                   Margin="10,0,0,0"
-                                   Text="{Binding DefaultPrice, StringFormat='{}Цена: {0} руб'}" />
-
-                        <TextBlock Grid.Row="4"
-                                   Grid.Column="2"
-                                   VerticalAlignment="Center"
-                                   Text="{Binding DiscountPercent, StringFormat='{} Скидка: {0}%'}" />
-
-                        <Button Grid.Column="3"
-                                Grid.Row="4"
-                                x:Name="ProductEditButton"
-                                Width="25"
-                                Height="25"
-                                Style="{DynamicResource RoundedCorners}"
-                                Content="&#xf044;"
-                                FontFamily="{StaticResource FontAwesome}"
-                                Tag="{Binding ProductId}"
-                                Click="ProductEditButton_Click" />
+                            <TextBlock Grid.Row="3"
+                                       Grid.ColumnSpan="4"
+                                       Text="{Binding CategoryNames, StringFormat='{}Категории: {0}'}"
+                                       TextWrapping="Wrap"
+                                       Margin="10,2,0,0" />
 
 
+                            <TextBlock Grid.Row="4"
+                                       Grid.Column="0"
+                                       Grid.ColumnSpan="2"
+                                       VerticalAlignment="Center"
+                                       Margin="10,0,0,0"
+                                       Text="{Binding DefaultPrice, StringFormat='{}Цена: {0} руб'}" />
 
-                    </Grid>
+                            <TextBlock Grid.Row="4"
+                                       Grid.Column="2"
+                                       VerticalAlignment="Center"
+                                       Text="{Binding DiscountPercent, StringFormat='{} Скидка: {0}%'}" />
 
-
-
-
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
+                            <Button Grid.Column="3"
+                                    Grid.Row="4"
+                                    x:Name="ProductEditButton"
+                                    Width="25"
+                                    Height="25"
+                                    Style="{DynamicResource RoundedCorners}"
+                                    Content="&#xf044;"
+                                    FontFamily="{StaticResource FontAwesome}"
+                                    Tag="{Binding ProductId}"
+                                    Click="ProductEditButton_Click" />
 
 
 
+                        </Grid>
 
-        </ItemsControl>
+
+
+
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+
+
+
+
+            </ItemsControl>
+        </ScrollViewer>
+
+
 
 
 

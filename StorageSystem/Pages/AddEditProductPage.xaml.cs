@@ -1,5 +1,7 @@
 ﻿using StorageSystem.DataAccess;
+using StorageSystem.Model;
 using StorageSystem.UserInteraction;
+using StorageSystem.Windows;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,6 +24,9 @@ namespace StorageSystem.Pages
     /// </summary>
     public partial class AddEditProductPage : Page
     {
+
+        public Product CurrentProduct { get; set; }
+
         public AddEditProductPage()
         {
             InitializeComponent();
@@ -35,9 +40,9 @@ namespace StorageSystem.Pages
         public AddEditProductPage(int productId) : this()
         {
 
-            AddEditProductButton.Content = "Изменить продукт";
+            AddEditProductButton.Content = "Изменить товар";
 
-            LoadProductValues();
+            LoadProductValues(productId);
 
         }
 
@@ -61,10 +66,15 @@ namespace StorageSystem.Pages
 
         }
 
-        private async void LoadProductValues()
+        private async void LoadProductValues(int productId)
         {
 
+            CurrentProduct = await StorageDbOperations.GetProduct(productId);
 
+            this.DataContext = CurrentProduct;
+
+            ProductCodeTextBox.Text = CurrentProduct.Code.ToString();           
+            ProductTypeComboBox.SelectedItem = CurrentProduct.ProductType;
 
         }
 
@@ -86,15 +96,15 @@ namespace StorageSystem.Pages
         private void AddEditProductButton_Click(object sender, RoutedEventArgs e)
         {
 
-            if(AddEditProductButton.Content.ToString() == "Добавить продукт")
+            if(AddEditProductButton.Content.ToString() == "Добавить товар")
+            {
+                AddProduct();
+
+
+            }else if (AddEditProductButton.Content.ToString() == "Изменить товар")
             {
 
-
-
-            }else if (AddEditProductButton.Content.ToString() == "Изменить продукт")
-            {
-
-
+                EditProduct();
 
             }
 
@@ -104,28 +114,130 @@ namespace StorageSystem.Pages
         }
 
 
-        private void AddProduct()
+        private async void AddProduct()
         {
 
 
+            if (!Validate())
+                return;
+
+            CurrentProduct = new Product();
+
+            FillProductFields();
+
+            await StorageDbOperations.AddNewProduct(CurrentProduct);
+
+            MessageBoxDisplay.DisplayNotification("Товар успешно добавлен");
+
+
+            this.NavigationService.Navigate(new Uri("/Pages/AddEditProductPage.xaml", UriKind.Relative));
 
         }
 
-        private void EditProduct()
+        private async void EditProduct()
+        {
+            if (!Validate())
+                return;
+
+            FillProductFields();
+
+
+            await StorageDbOperations.EditProduct(CurrentProduct);
+
+            MessageBoxDisplay.DisplayNotification("Товар успешно изменен");
+
+            NavigationService.GoBack();
+
+        }
+
+        private void FillProductFields()
         {
 
+            CurrentProduct.Title = ProductTitleTextBox.Text;
+            CurrentProduct.BrandName = ProductBrandTextBox.Text;
+            CurrentProduct.Code = Convert.ToDecimal(ProductCodeTextBox.Text);
+            CurrentProduct.Barcode = ProductBarcodeTextBox.Text;
+            CurrentProduct.Weight = Convert.ToInt32(ProductWeightTextBox.Text);
+            CurrentProduct.DefaultPrice = Convert.ToDecimal(DefaultPriceTextBox.Text.Replace('.',','));
+            CurrentProduct.DiscountPercent = Convert.ToInt32(DiscountTextBox.Text);
+            CurrentProduct.ProductTypeId = ((ProductType)ProductTypeComboBox.SelectedValue).ProductTypeId;
 
         }
+
 
         private bool Validate()
         {
 
+            string errorMessage = "";
+
+            if (string.IsNullOrEmpty(ProductTitleTextBox.Text))
+            {
+                errorMessage += "Необходимо ввести название продукта \n";
+            }
+
+            if (string.IsNullOrEmpty(ProductBrandTextBox.Text))
+            {
+                errorMessage += "Необходимо ввести название бренда \n";
+            }
+
+            if (string.IsNullOrEmpty(ProductBarcodeTextBox.Text))
+            {
+                errorMessage += "Необходимо ввести штрихкод \n";
+
+            }
+            else if (ProductBarcodeTextBox.Text.Length != 13)
+            {
+                errorMessage += "Штрихкод должен быть равен 13 символам \n";
+
+            }            
+
+            if(string.IsNullOrEmpty(ProductWeightTextBox.Text))
+            {
+                errorMessage += "Необходимо ввести вес \n";
+            }
+            else
+            {
+                var weight = Convert.ToInt32(ProductWeightTextBox.Text);
+
+                if(weight == 0)
+                    errorMessage += "Вес не может быть равен 0 \n";
+
+            }
+
+            if (string.IsNullOrEmpty(DefaultPriceTextBox.Text))
+            {
+
+                errorMessage += "Необходимо ввести цену \n";
+
+            }
+            else
+            {
+
+                var price = Convert.ToDecimal(DefaultPriceTextBox.Text.Replace('.',','));
+                if (price == 0)
+                    errorMessage += "Цена не может быть равна 0 \n";
 
 
+            }
 
 
+            if (string.IsNullOrEmpty(DiscountTextBox.Text))
+            {
 
-            return false;
+                errorMessage += "Необходимо ввести процент скидки \n";
+
+            }
+
+            
+            if(errorMessage.Length > 0)
+            {
+                MessageBoxDisplay.DisplayError(errorMessage);
+
+                return false;
+            }
+
+            return true;
+            
         }
 
         private void NumberTextBox_PreviewKeyDown(object sender, KeyEventArgs e)
@@ -167,7 +279,7 @@ namespace StorageSystem.Pages
             }
                 
 
-            decimal defaultPrice = Convert.ToDecimal(DefaultPriceTextBox.Text);
+            decimal defaultPrice = Convert.ToDecimal(DefaultPriceTextBox.Text.Replace('.',','));
             int discountPercent = Convert.ToInt32(DiscountTextBox.Text);
 
             decimal onePercent = defaultPrice / 100;

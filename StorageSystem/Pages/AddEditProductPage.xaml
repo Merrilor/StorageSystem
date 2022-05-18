@@ -46,10 +46,11 @@
                 <TextBox  x:Name="ProductTitleTextBox"
                           HorizontalContentAlignment="Left"
                           VerticalContentAlignment="Center"
-                          MaxLength="40"
+                          MaxLength="60"
                           Margin="0 5 0 0"
                           MinHeight="35"
-                          MaxHeight="50" />
+                          MaxHeight="50" 
+                          Text="{Binding Title}"/>
 
 
             </StackPanel>
@@ -65,7 +66,9 @@
                           MaxLength="40"
                           Margin="0 5 0 0"
                           MinHeight="35"
-                          MaxHeight="50" />
+                          MaxHeight="50" 
+                          Text="{Binding BrandName}"
+                          />
 
 
             </StackPanel>
@@ -82,7 +85,9 @@
                           Margin="0 5 0 0"
                           MinHeight="35"
                           IsReadOnly="True"
-                          MaxHeight="50" />
+                          MaxHeight="50" 
+                          
+                          />
 
                 
             </StackPanel>
@@ -100,6 +105,7 @@
                           MinHeight="35"
                           MaxHeight="50" 
                           PreviewKeyDown="NumberTextBox_PreviewKeyDown"
+                          Text="{Binding Barcode}"
                           />
 
 
@@ -117,7 +123,8 @@
                           Margin="0 5 0 0"
                           MinHeight="35"
                           MaxHeight="50"
-                          PreviewKeyDown="NumberTextBox_PreviewKeyDown"/>
+                          PreviewKeyDown="NumberTextBox_PreviewKeyDown"
+                          Text="{Binding Weight}"/>
 
 
             </StackPanel>
@@ -158,6 +165,7 @@
                                   MaxHeight="50" 
                                   TextChanged="UpdateTotalPrice"
                                   PreviewKeyDown="DefaultPriceTextBox_PreviewKeyDown"
+                                  Text="{Binding DefaultPrice}"
                                   />
 
 
@@ -178,7 +186,9 @@
                                   MinHeight="25"
                                   MaxHeight="50"
                                   TextChanged="UpdateTotalPrice"
-                                  PreviewKeyDown="NumberTextBox_PreviewKeyDown"/>
+                                  PreviewKeyDown="NumberTextBox_PreviewKeyDown"
+                                  Text="{Binding DiscountPercent}"
+                                  />
 
 
                     </StackPanel>
@@ -344,7 +354,7 @@
                         x:Name="AddEditProductButton"
                         Margin="10"
                         Style="{DynamicResource RoundedCorners}"
-                        Content="Добавить продукт"
+                        Content="Добавить товар"
                         Background="Green" 
                         Click="AddEditProductButton_Click"/>
 

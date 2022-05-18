@@ -98,7 +98,9 @@
                 <RowDefinition />
             </Grid.RowDefinitions>
 
-            <StackPanel Grid.RowSpan="3"
+            <StackPanel 
+                x:Name="MenuStackPanel"
+                Grid.RowSpan="3"
                         Grid.Row="1">
 
                 <Expander Header="Склад">

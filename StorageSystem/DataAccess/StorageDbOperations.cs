@@ -25,11 +25,11 @@ namespace StorageSystem.DataAccess
         }
      
 
-        public  static void SaveChanges()
+        public async  static Task SaveChanges()
         {
 
 
-            _Entities.SaveChanges();
+            await _Entities.SaveChangesAsync();
 
 
         }
@@ -130,11 +130,11 @@ namespace StorageSystem.DataAccess
 
         }
 
-        public static IQueryable<Product> GetProductRange(int minCode, int maxCode)
+        public static async Task<List<Product>> GetProductRange(int minCode, int maxCode)
         {
 
 
-            return _Entities.Product.Where(p => p.Code >= minCode && p.Code <= maxCode);
+            return await _Entities.Product.Where(p => p.Code >= minCode && p.Code <= maxCode).ToListAsync();
 
 
 
@@ -149,6 +149,26 @@ namespace StorageSystem.DataAccess
             _Entities.User.Add(newUser);
 
             SaveChanges();
+
+            
+        }
+
+
+        public async static Task AddNewProduct(Product newProduct)
+        {
+
+
+            _Entities.Product.Add(newProduct);
+
+            await SaveChanges();
+
+
+        }
+
+        public async static Task EditProduct(Product editedProduct)
+        {
+
+            await SaveChanges();
 
 
         }
@@ -171,6 +191,14 @@ namespace StorageSystem.DataAccess
         public  static Product GetLastProduct()
         {
             return  _Entities.Product.OrderByDescending(p=> p.Code).First();
+        }
+
+        public async static Task<Product> GetProduct(int productId)
+        {
+
+            return await _Entities.Product.SingleOrDefaultAsync(p => p.ProductId == productId); 
+
+
         }
 
 
