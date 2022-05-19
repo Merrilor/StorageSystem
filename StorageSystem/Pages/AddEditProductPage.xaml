@@ -29,8 +29,8 @@
                 <RowDefinition />
                 <RowDefinition />
                 <RowDefinition />
-                <RowDefinition Height="50"/>
-                <RowDefinition Height="75"/>
+                <RowDefinition Height="50" />
+                <RowDefinition Height="75" />
             </Grid.RowDefinitions>
 
             <Grid.ColumnDefinitions>
@@ -49,8 +49,8 @@
                           MaxLength="60"
                           Margin="0 5 0 0"
                           MinHeight="35"
-                          MaxHeight="50" 
-                          Text="{Binding Title}"/>
+                          MaxHeight="50"
+                          Text="{Binding Title}" />
 
 
             </StackPanel>
@@ -66,9 +66,8 @@
                           MaxLength="40"
                           Margin="0 5 0 0"
                           MinHeight="35"
-                          MaxHeight="50" 
-                          Text="{Binding BrandName}"
-                          />
+                          MaxHeight="50"
+                          Text="{Binding BrandName}" />
 
 
             </StackPanel>
@@ -85,11 +84,9 @@
                           Margin="0 5 0 0"
                           MinHeight="35"
                           IsReadOnly="True"
-                          MaxHeight="50" 
-                          
-                          />
+                          MaxHeight="50" />
 
-                
+
             </StackPanel>
 
             <StackPanel Margin="5"
@@ -103,10 +100,9 @@
                           MaxLength="13"
                           Margin="0 5 0 0"
                           MinHeight="35"
-                          MaxHeight="50" 
+                          MaxHeight="50"
                           PreviewKeyDown="NumberTextBox_PreviewKeyDown"
-                          Text="{Binding Barcode}"
-                          />
+                          Text="{Binding Barcode}" />
 
 
             </StackPanel>
@@ -124,7 +120,7 @@
                           MinHeight="35"
                           MaxHeight="50"
                           PreviewKeyDown="NumberTextBox_PreviewKeyDown"
-                          Text="{Binding Weight}"/>
+                          Text="{Binding Weight}" />
 
 
             </StackPanel>
@@ -162,11 +158,10 @@
                                   MaxLength="6"
                                   Margin="0 5 0 0"
                                   MinHeight="25"
-                                  MaxHeight="50" 
+                                  MaxHeight="50"
                                   TextChanged="UpdateTotalPrice"
                                   PreviewKeyDown="DefaultPriceTextBox_PreviewKeyDown"
-                                  Text="{Binding DefaultPrice}"
-                                  />
+                                  Text="{Binding DefaultPrice}" />
 
 
                     </StackPanel>
@@ -187,8 +182,7 @@
                                   MaxHeight="50"
                                   TextChanged="UpdateTotalPrice"
                                   PreviewKeyDown="NumberTextBox_PreviewKeyDown"
-                                  Text="{Binding DiscountPercent}"
-                                  />
+                                  Text="{Binding DiscountPercent}" />
 
 
                     </StackPanel>
@@ -201,7 +195,9 @@
 
                         <TextBlock Text="Итоговая цена:" />
 
-                        <TextBlock Margin="5,0,0,0" x:Name="TotalPriceTextBlock"  Text="0 руб"/>
+                        <TextBlock Margin="5,0,0,0"
+                                   x:Name="TotalPriceTextBlock"
+                                   Text="0 руб" />
 
 
                     </StackPanel>
@@ -217,15 +213,16 @@
                       Header="Изображения"
                       Background="{DynamicResource ControlBrightDefaultBackground}">
 
-                <Grid >
+                <Grid>
 
                     <Grid.RowDefinitions>
                         <RowDefinition />
-                        <RowDefinition Height="0.2*"/>
+                        <RowDefinition Height="0.2*" />
                     </Grid.RowDefinitions>
 
                     <ListView x:Name="ImageListView"
-                              MinHeight="150">
+                              MinHeight="150"
+                              SelectionMode="Single">
 
                         <ListView.ItemContainerStyle>
                             <Style TargetType="ListViewItem">
@@ -233,21 +230,23 @@
                                         Value="50" />
                             </Style>
                         </ListView.ItemContainerStyle>
-                        
+
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <Grid>
 
 
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="50"/>
+                                        <ColumnDefinition Width="50" />
                                         <ColumnDefinition />
                                     </Grid.ColumnDefinitions>
 
 
-                                    <Image Source="{Binding FullImagePath}" Margin="5" />
+                                    <Image Source="{Binding FullImagePath}"
+                                           Margin="5" />
 
-                                    <TextBlock Text="{Binding ImageName}" Grid.Column="1" />
+                                    <TextBlock Text="{Binding ImageName}"
+                                               Grid.Column="1" />
 
                                 </Grid>
                             </DataTemplate>
@@ -267,18 +266,9 @@
                                 FontSize="25"
                                 Style="{DynamicResource RoundedCorners}"
                                 Content="&#xf0fe;"
-                                
                                 FontFamily="{StaticResource FontAwesome}"
                                 Click="AddImageButton_Click" />
 
-                        <Button x:Name="EditImageButton"
-                                Width="30"
-                                Height="30"
-                                Style="{DynamicResource RoundedCorners}"
-                                Content="&#xf044;"
-                                Margin="10,0,0,0"
-                                FontFamily="{StaticResource FontAwesome}"
-                                Click="EditImageButton_Click" />
 
                         <Button x:Name="DeleteImageButton"
                                 Width="30"
@@ -286,7 +276,6 @@
                                 Style="{DynamicResource RoundedCorners}"
                                 Content="&#xf2ed;"
                                 Margin="10,0,0,0"
-                                
                                 FontFamily="{StaticResource FontAwesome}"
                                 Click="DeleteImageButton_Click" />
 
@@ -313,7 +302,7 @@
                 <RowDefinition />
                 <RowDefinition />
                 <RowDefinition />
-                <RowDefinition Height="50"/>
+                <RowDefinition Height="50" />
             </Grid.RowDefinitions>
 
             <StackPanel Margin="5"
@@ -328,10 +317,8 @@
                           Margin="0,5,0,0"
                           Width="200"
                           Height="30"
-                          HorizontalAlignment="Left" 
-                          DisplayMemberPath="Name"
-                          
-                          />
+                          HorizontalAlignment="Left"
+                          DisplayMemberPath="Name" />
 
 
             </StackPanel>
@@ -343,9 +330,95 @@
                       Grid.RowSpan="5">
 
 
+                <Grid>
 
-                
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.7*" />
+                        <ColumnDefinition Width="50" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
 
+                    <ListView x:Name="CategoryListView"
+                              Margin="5">
+
+
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="Height"
+                                        Value="50" />
+                            </Style>
+                        </ListView.ItemContainerStyle>
+
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Category.Name}" />
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+
+
+                    <StackPanel Grid.Column="1"
+                                Orientation="Vertical">
+
+                        <Button x:Name="AddCategoryButton"
+                                Width="30"
+                                Height="30"
+                                FontSize="25"
+                                Style="{DynamicResource RoundedCorners}"
+                                Content="&#xf0fe;"
+                                Margin="0,10,0,0"
+                                FontFamily="{StaticResource FontAwesome}"
+                                Click="AddImageButton_Click" />
+
+
+                        <Button x:Name="DeleteCategoryButton"
+                                Width="30"
+                                Height="30"
+                                Style="{DynamicResource RoundedCorners}"
+                                Content="&#xf2ed;"
+                                Margin="0,10,0,0"
+                                FontFamily="{StaticResource FontAwesome}"
+                                Click="DeleteImageButton_Click" />
+
+
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="2">
+
+
+                        <Button Height="30"
+                                Margin="10"
+                                x:Name="NewCategoryButton"
+                                Content="Добавить категорию" />
+
+                        <StackPanel Margin="10"
+                                    Orientation="Vertical"
+                                    Visibility="Collapsed">
+
+
+                            <TextBlock Text="Название новой категории:" />
+
+                            <TextBox x:Name="CategoryNameTextBox"
+                                     Margin="0,10,0,0" 
+                                     Height="25"
+                                     MaxLength="30"
+                                     />
+
+                            <Button x:Name="SaveCategoryButton"
+                                    Margin="0,10,0,0"
+                                    Height="25"
+                                    Content="Сохранить категорию"
+                                    />
+
+
+                        </StackPanel>
+
+
+                    </StackPanel>
+
+
+
+                </Grid>
 
             </GroupBox>
 
@@ -362,8 +435,8 @@
                         Margin="10"
                         Style="{DynamicResource RoundedCorners}"
                         Content="Добавить товар"
-                        Background="Green" 
-                        Click="AddEditProductButton_Click"/>
+                        Background="Green"
+                        Click="AddEditProductButton_Click" />
 
 
             </Grid>

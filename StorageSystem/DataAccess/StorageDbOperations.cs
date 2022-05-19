@@ -165,8 +165,42 @@ namespace StorageSystem.DataAccess
 
         }
 
-        public async static Task EditProduct(Product editedProduct)
+        public async static Task AddNewProduct(Product newProduct, List<ProductImage> productImages)
         {
+
+
+            _Entities.Product.Add(newProduct);
+
+            foreach (var image in productImages)
+            {
+                image.ProductId = newProduct.ProductId;
+
+                _Entities.ProductImage.Add(image);
+
+            }
+
+
+            await SaveChanges();
+
+
+        }
+
+        public async static Task EditProduct(Product editedProduct, List<ProductImage> newProductImages)
+        {
+
+
+            var oldProductImages = _Entities.ProductImage.Where(pi => pi.ProductId == editedProduct.ProductId).ToList();
+            _Entities.ProductImage.RemoveRange(oldProductImages);
+
+            await SaveChanges();
+
+            foreach (var image in newProductImages)
+            {
+                image.ProductId = editedProduct.ProductId;
+                _Entities.ProductImage.Add(image);
+
+            }
+
 
             await SaveChanges();
 
@@ -188,9 +222,9 @@ namespace StorageSystem.DataAccess
 
         }
 
-        public  static Product GetLastProduct()
+        public async  static Task<Product> GetLastProduct()
         {
-            return  _Entities.Product.OrderByDescending(p=> p.Code).First();
+            return await _Entities.Product.OrderByDescending(p=> p.Code).FirstAsync();
         }
 
         public async static Task<Product> GetProduct(int productId)

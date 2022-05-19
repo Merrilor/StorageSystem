@@ -31,20 +31,25 @@ namespace StorageSystem.Pages
 
         public ObservableCollection<ProductImage> ProductImageList { get; set; } = new ObservableCollection<ProductImage>();
 
+        public ObservableCollection<ProductCategory> ProductCategoryList {get;set;} = new ObservableCollection<ProductCategory>();
+
         public AddEditProductPage()
         {
             InitializeComponent();
 
-            ConfigurePage();
+            ConfigureAddPage();
             
 
         }
 
 
-        public AddEditProductPage(int productId) : this()
+        public AddEditProductPage(int productId)
         {
+            InitializeComponent();
 
             AddEditProductButton.Content = "Изменить товар";
+
+            ConfigureEditPage();
 
             LoadProductValues(productId);
 
@@ -59,16 +64,28 @@ namespace StorageSystem.Pages
         }
 
 
-        private async void ConfigurePage()
+        private async void ConfigureAddPage()
         {
 
             ProductTypeComboBox.ItemsSource = await StorageDbOperations.GetAllProductTypes();
             ProductTypeComboBox.SelectedIndex = 0;
 
-            var lastProduct =  StorageDbOperations.GetLastProduct();
+            var lastProduct =  await StorageDbOperations.GetLastProduct();
             ProductCodeTextBox.Text = (lastProduct.Code + 1).ToString();
 
             ImageListView.ItemsSource = ProductImageList;
+            CategoryListView.ItemsSource = ProductCategoryList;
+
+        }
+
+        private async void ConfigureEditPage()
+        {
+
+            ProductTypeComboBox.ItemsSource = await StorageDbOperations.GetAllProductTypes();
+            ProductTypeComboBox.SelectedIndex = 0;
+
+            ImageListView.ItemsSource = ProductImageList;
+            CategoryListView.ItemsSource = ProductCategoryList;
 
         }
 
@@ -88,6 +105,12 @@ namespace StorageSystem.Pages
             foreach (var image in CurrentProduct.ProductImage)
             {
                 ProductImageList.Add(image);
+            }
+
+            ProductCategoryList.Clear();
+            foreach (var category in CurrentProduct.ProductCategory)
+            {
+                ProductCategoryList.Add(category);
             }
 
 
@@ -124,13 +147,16 @@ namespace StorageSystem.Pages
             }
         }
 
-        private void EditImageButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void DeleteImageButton_Click(object sender, RoutedEventArgs e)
         {
+
+            if (ImageListView.SelectedItem != null)
+            {
+
+                ProductImageList.Remove((ProductImage)ImageListView.SelectedItem);
+
+            }
+
 
         }
 
@@ -166,7 +192,7 @@ namespace StorageSystem.Pages
 
             FillProductFields();
 
-            await StorageDbOperations.AddNewProduct(CurrentProduct);
+            await StorageDbOperations.AddNewProduct(CurrentProduct, ProductImageList.ToList());
 
             MessageBoxDisplay.DisplayNotification("Товар успешно добавлен");
 
@@ -183,7 +209,7 @@ namespace StorageSystem.Pages
             FillProductFields();
 
 
-            await StorageDbOperations.EditProduct(CurrentProduct);
+            await StorageDbOperations.EditProduct(CurrentProduct, ProductImageList.ToList());
 
             MessageBoxDisplay.DisplayNotification("Товар успешно изменен");
 

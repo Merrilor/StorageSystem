@@ -95,7 +95,7 @@
                         <GroupBox Header="Бренд"
                                   BorderThickness="0">
 
-                            <ComboBox x:Name="BrandComboBox" />
+                            <ComboBox x:Name="BrandComboBox" IsTextSearchEnabled="True" />
 
                         </GroupBox>
 
