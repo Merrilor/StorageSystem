@@ -5,8 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:StorageSystem"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
-        mc:Ignorable="d"
-        Icon="/Image/iconMain.png"
+        mc:Ignorable="d"       
         WindowStartupLocation="CenterScreen"
         WindowState="Maximized"
         Style="{DynamicResource CustomWindowStyle}"
@@ -97,6 +96,19 @@
                 <RowDefinition />
                 <RowDefinition />
             </Grid.RowDefinitions>
+
+
+            <StackPanel HorizontalAlignment="Center" Orientation="Vertical">
+                
+                <Image Source="/Image/iconMain.png"
+                       Width="60">
+
+                </Image>
+
+                <TextBlock Text="СИСТЕМА СКЛАДА" />
+
+            </StackPanel>
+            
 
             <StackPanel 
                 x:Name="MenuStackPanel"
@@ -224,7 +236,8 @@
         <Frame Grid.Row="1"
                Grid.Column="1"
                x:Name="ContentFrame"
-               NavigationUIVisibility="Hidden">
+               NavigationUIVisibility="Hidden"
+               Source="/Pages/WarehouseListPage.xaml">
 
 
 

@@ -1,9 +1,12 @@
-﻿using StorageSystem.DataAccess;
+﻿using Microsoft.Win32;
+using StorageSystem.DataAccess;
 using StorageSystem.Model;
 using StorageSystem.UserInteraction;
 using StorageSystem.Windows;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,7 +18,6 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace StorageSystem.Pages
 {
@@ -26,6 +28,8 @@ namespace StorageSystem.Pages
     {
 
         public Product CurrentProduct { get; set; }
+
+        public ObservableCollection<ProductImage> ProductImageList { get; set; } = new ObservableCollection<ProductImage>();
 
         public AddEditProductPage()
         {
@@ -64,6 +68,8 @@ namespace StorageSystem.Pages
             var lastProduct =  StorageDbOperations.GetLastProduct();
             ProductCodeTextBox.Text = (lastProduct.Code + 1).ToString();
 
+            ImageListView.ItemsSource = ProductImageList;
+
         }
 
         private async void LoadProductValues(int productId)
@@ -76,11 +82,46 @@ namespace StorageSystem.Pages
             ProductCodeTextBox.Text = CurrentProduct.Code.ToString();           
             ProductTypeComboBox.SelectedItem = CurrentProduct.ProductType;
 
+            
+            ProductImageList.Clear();
+
+            foreach (var image in CurrentProduct.ProductImage)
+            {
+                ProductImageList.Add(image);
+            }
+
+
         }
 
         private void AddImageButton_Click(object sender, RoutedEventArgs e)
         {
+            OpenFileDialog fileDialog = new OpenFileDialog();
+            fileDialog.Filter = "Image (*.png);(*.jpg);(*.jpeg) | *.png;*.jpg;*.jpeg;";
 
+
+            if (fileDialog.ShowDialog() == true)
+            {
+                string path = fileDialog.FileName;
+
+                var newImage = new ProductImage
+                {
+
+                    ImagePath = "/images/product/" + Path.GetFileName(path)
+
+
+                };
+
+                if (!File.Exists(newImage.FullImagePath))
+                {
+
+                    File.Copy(path, Directory.GetCurrentDirectory() + $@"/images/product/{Path.GetFileName(path)}", true);
+
+                }
+
+                ProductImageList.Add(newImage);
+
+
+            }
         }
 
         private void EditImageButton_Click(object sender, RoutedEventArgs e)

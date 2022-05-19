@@ -38,6 +38,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Image\iconMain.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
@@ -335,6 +338,7 @@
     <Compile Include="Model\ProductImage.cs">
       <DependentUpon>StorageModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\ProductImageExtension.cs" />
     <Compile Include="Model\ProductType.cs">
       <DependentUpon>StorageModel.tt</DependentUpon>
     </Compile>
@@ -552,6 +556,7 @@
   <ItemGroup>
     <Resource Include="Image\productPlaceholder.png" />
     <Resource Include="Image\placeholderUser.jpg" />
+    <Resource Include="Image\iconMain.ico" />
     <Content Include="Model\StorageModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>StorageModel.edmx</DependentUpon>
