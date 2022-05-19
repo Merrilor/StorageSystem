@@ -10,26 +10,32 @@ namespace StorageSystem.DataAccess
 {
     public static class StorageDbOperations
     {
-
-        private static StorageEntities _Entities;
-
+     
         private static bool _Loaded = false;
+
+        private static StorageEntities _persistentEntities = new StorageEntities();
        
 
         static StorageDbOperations()
         {
 
-            if(_Entities is null)
-                _Entities = new StorageEntities();
+            
+
+        }
+
+        public async static Task SavePersistentChanges()
+        {
+
+            await _persistentEntities.SaveChangesAsync();
 
         }
      
 
-        public async  static Task SaveChanges()
+        public async  static Task SaveChanges(StorageEntities entities)
         {
 
 
-            await _Entities.SaveChangesAsync();
+            await entities.SaveChangesAsync();
 
 
         }
@@ -38,35 +44,42 @@ namespace StorageSystem.DataAccess
         public async static Task<bool> TryLoginUser(string login, string password)
         {
 
-            var user = await _Entities.User.SingleOrDefaultAsync(u=> u.Login == login && u.Password == password);           
-
-            if (user is null)
-                return false;
-
-            CurrentUser.Id = user.UserId;
-            CurrentUser.Login = user.Login;
-            CurrentUser.Role = (UserRole)Enum.Parse(typeof(UserRole), user.Role.Name);
-            if(user.Photo != null)
+            using(var entities = EntityProvider.CreateEntities())
             {
-                CurrentUser.UserImagePath = user.Photo;
+
+
+                var user = await entities.User.SingleOrDefaultAsync(u => u.Login == login && u.Password == password);
+
+                if (user is null)
+                    return false;
+
+                CurrentUser.Id = user.UserId;
+                CurrentUser.Login = user.Login;
+                CurrentUser.Role = (UserRole)Enum.Parse(typeof(UserRole), user.Role.Name);
+                if (user.Photo != null)
+                {
+                    CurrentUser.UserImagePath = user.Photo;
+                }
+
+                var currentDate = await entities.Database.SqlQuery<DateTime>("SELECT getdate()").ToAsyncEnumerable().First();
+
+                user.LastLoginDate = currentDate;
+
+
+
+                entities.LoginHistory.Add(new LoginHistory
+                {
+                    LoginDatetime = currentDate,
+                    UserId = user.UserId
+
+                });
+
+                await SaveChanges(entities);
+
+                return true;
+
+
             }
-
-            var currentDate = await _Entities.Database.SqlQuery<DateTime>("SELECT getdate()").ToAsyncEnumerable().First();
-
-            user.LastLoginDate = currentDate;
-
-            
-
-            _Entities.LoginHistory.Add(new LoginHistory
-            {
-                LoginDatetime = currentDate,
-                UserId = user.UserId
-
-            });
-
-            _Entities.SaveChanges();
-
-            return true;
 
 
         }
@@ -74,93 +87,122 @@ namespace StorageSystem.DataAccess
         public static void LogoutUser()
         {
 
-            if (CurrentUser.Id == 0)
-                return;
-
-            var currentUser = _Entities.User.Single(u => u.UserId == CurrentUser.Id);
-
-            currentUser.LoginHistory.First().ExitDatetime = _Entities.Database.SqlQuery<DateTime>("SELECT getdate()").AsEnumerable().First();
+            using (var entities = EntityProvider.CreateEntities())
+            {
 
 
+                if (CurrentUser.Id == 0)
+                    return;
 
-            SaveChanges();
+                var currentUser = entities.User.Single(u => u.UserId == CurrentUser.Id);
+
+                currentUser.LoginHistory.First().ExitDatetime = entities.Database.SqlQuery<DateTime>("SELECT getdate()").AsEnumerable().First();
+
+
+
+                 entities.SaveChanges();
+
+            }
 
         }
 
 
         public async static Task<List<WarehouseUnit>> GetAvailableWarehouses()
         {
+            using (var entities = EntityProvider.CreateEntities())
+            {
 
-            return await _Entities.WarehouseUnit.Where(wh => wh.IsAvailable == true).ToListAsync();
+                return await entities.WarehouseUnit.Where(wh => wh.IsAvailable == true).ToListAsync();
 
+            }
         }
 
         public async static Task<List<WarehouseUnit>> GetWarehouseRange(int minCode, int maxCode)
         {
 
+            
 
-
-            return await _Entities.WarehouseUnit
+                return await _persistentEntities.WarehouseUnit
                 .Where(wh => wh.Product.Code > minCode && wh.Product.Code < maxCode)
                 .ToListAsync();
+
+            
 
         }
 
 
         public static List<WarehouseUnit> GetAllWarehouses()
         {
+            using (var entities = EntityProvider.CreateEntities())
+            {
 
-            return _Entities.WarehouseUnit.ToList();
+                return entities.WarehouseUnit.ToList();
+
+            }
 
         }
 
         public async static Task<List<Role>> GetAllRoles()
         {
-
-            return await _Entities.Role.ToListAsync();
-
+            using (var entities = EntityProvider.CreateEntities())
+            {
+                return await entities.Role.ToListAsync();
+            }
 
         }
 
         public async static Task<WarehouseUnit> GetWarehouseUnit(int id)
         {
+            using (var entities = EntityProvider.CreateEntities())
+            {
 
-            return await _Entities.WarehouseUnit.SingleAsync(wh => wh.WarehouseUnitId == id);
+                return await entities.WarehouseUnit.SingleAsync(wh => wh.WarehouseUnitId == id);
 
-
+            }
         }
 
         public static async Task<List<Product>> GetProductRange(int minCode, int maxCode)
         {
+            using (var entities = EntityProvider.CreateEntities())
+            {
+
+                return await entities.Product.Where(p => p.Code >= minCode && p.Code <= maxCode)
+                    .Include(p=> p.ProductImage)
+                    .Include(p=> p.ProductCategory)
+                    .Include(p=> p.ProductCategory.Select(pc=> pc.Category))
+                    .ToListAsync();
 
 
-            return await _Entities.Product.Where(p => p.Code >= minCode && p.Code <= maxCode).ToListAsync();
-
-
-
+            }
         }
 
 
         public async static void AddNewUser(User newUser)
         {
+            using (var entities = EntityProvider.CreateEntities())
+            {
 
-            newUser.RegistrationDate = _Entities.Database.SqlQuery<DateTime>("SELECT getdate()").AsEnumerable().First();
+                newUser.RegistrationDate = entities.Database.SqlQuery<DateTime>("SELECT getdate()").AsEnumerable().First();
 
-            _Entities.User.Add(newUser);
+                entities.User.Add(newUser);
 
-            SaveChanges();
+                await SaveChanges(entities);
 
+            }
             
         }
 
 
         public async static Task AddNewProduct(Product newProduct)
         {
+            using (var entities = EntityProvider.CreateEntities())
+            {
 
+                entities.Product.Add(newProduct);
 
-            _Entities.Product.Add(newProduct);
+                await SaveChanges(entities);
 
-            await SaveChanges();
+            }
 
 
         }
@@ -168,71 +210,92 @@ namespace StorageSystem.DataAccess
         public async static Task AddNewProduct(Product newProduct, List<ProductImage> productImages)
         {
 
-
-            _Entities.Product.Add(newProduct);
-
-            foreach (var image in productImages)
+            using (var entities = EntityProvider.CreateEntities())
             {
-                image.ProductId = newProduct.ProductId;
+                entities.Product.Add(newProduct);
 
-                _Entities.ProductImage.Add(image);
+                foreach (var image in productImages)
+                {
+                    image.ProductId = newProduct.ProductId;
+
+                    entities.ProductImage.Add(image);
+
+                }
+
+
+                await SaveChanges(entities);
 
             }
-
-
-            await SaveChanges();
-
-
         }
 
         public async static Task EditProduct(Product editedProduct, List<ProductImage> newProductImages)
         {
-
-
-            var oldProductImages = _Entities.ProductImage.Where(pi => pi.ProductId == editedProduct.ProductId).ToList();
-            _Entities.ProductImage.RemoveRange(oldProductImages);
-
-            await SaveChanges();
-
-            foreach (var image in newProductImages)
+            using (var entities = EntityProvider.CreateEntities())
             {
-                image.ProductId = editedProduct.ProductId;
-                _Entities.ProductImage.Add(image);
+
+                entities.Entry(editedProduct).State = EntityState.Modified;
+
+                var oldProductImages = entities.ProductImage.Where(pi => pi.ProductId == editedProduct.ProductId).ToList();
+                entities.ProductImage.RemoveRange(oldProductImages);
+
+                await SaveChanges(entities);
+
+                foreach (var image in newProductImages)
+                {
+                    
+                    image.ProductId = editedProduct.ProductId;
+                    entities.ProductImage.Add(image);
+
+                }
+
+
+                await SaveChanges(entities);
 
             }
-
-
-            await SaveChanges();
-
-
         }
 
         public async static Task< List<string>> GetAllBrands()
         {
+            using (var entities = EntityProvider.CreateEntities())
+            {
 
-            return await _Entities.Product.Select(p => p.BrandName).Distinct().ToListAsync();
+                return await entities.Product.Select(p => p.BrandName).Distinct().ToListAsync();
 
+            }
 
         }
 
         public async static Task<List<ProductType>> GetAllProductTypes()
         {
+            using (var entities = EntityProvider.CreateEntities())
+            {
 
-            return await _Entities.ProductType.ToListAsync();
-
+                return await entities.ProductType.ToListAsync();
+            }
         }
 
         public async  static Task<Product> GetLastProduct()
         {
-            return await _Entities.Product.OrderByDescending(p=> p.Code).FirstAsync();
+            using (var entities = EntityProvider.CreateEntities())
+            {
+
+                return await entities.Product.OrderByDescending(p => p.Code).FirstAsync();
+
+            }
         }
 
         public async static Task<Product> GetProduct(int productId)
         {
+            using (var entities = EntityProvider.CreateEntities())
+            {
+                return await entities.Product
+                    .Include(p=> p.ProductCategory)
+                    .Include(p=> p.ProductType)
+                    .Include(p=> p.ProductImage)
+                    .Include(p=> p.ProductCategory.Select(pc=> pc.Category))
+                    .SingleOrDefaultAsync(p => p.ProductId == productId);
 
-            return await _Entities.Product.SingleOrDefaultAsync(p => p.ProductId == productId); 
-
-
+            }
         }
 
 

@@ -150,7 +150,14 @@ namespace StorageSystem.Pages
         private void WarehouseDatagrid_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
         {
 
-            StorageDbOperations.SaveChanges();
+            SaveDatagridChanges();
+
+        }
+
+        private async void SaveDatagridChanges()
+        {
+
+            await StorageDbOperations.SavePersistentChanges();
 
         }
 

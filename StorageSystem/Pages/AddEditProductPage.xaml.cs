@@ -229,6 +229,8 @@ namespace StorageSystem.Pages
             CurrentProduct.DiscountPercent = Convert.ToInt32(DiscountTextBox.Text);
             CurrentProduct.ProductTypeId = ((ProductType)ProductTypeComboBox.SelectedValue).ProductTypeId;
 
+            CurrentProduct.ProductType = null;
+
         }
 
 

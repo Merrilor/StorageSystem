@@ -300,6 +300,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="DataAccess\CurrentUser.cs" />
+    <Compile Include="DataAccess\EntityProvider.cs" />
     <Compile Include="DataAccess\StorageDbOperations.cs" />
     <Compile Include="Model\BonusCard.cs">
       <DependentUpon>StorageModel.tt</DependentUpon>

@@ -128,7 +128,7 @@ namespace StorageSystem.Windows
             UIElement element = (UIElement)sender;
 
             element.IsEnabled = false;
-            await Task.Delay(2000); 
+            await Task.Delay(200); 
             element.IsEnabled = true;
 
 
@@ -137,7 +137,7 @@ namespace StorageSystem.Windows
         {
 
             MenuStackPanel.IsEnabled = false;
-            await Task.Delay(2000);
+            await Task.Delay(200);
             MenuStackPanel.IsEnabled = true;
         }
 
