@@ -111,7 +111,7 @@
           <Key>
             <PropertyRef Name="ProductCategoryId" />
           </Key>
-          <Property Name="ProductCategoryId" Type="int" Nullable="false" />
+          <Property Name="ProductCategoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ProductId" Type="int" Nullable="false" />
           <Property Name="CategoryId" Type="int" Nullable="false" />
         </EntityType>

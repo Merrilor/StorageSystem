@@ -207,7 +207,7 @@ namespace StorageSystem.DataAccess
 
         }
 
-        public async static Task AddNewProduct(Product newProduct, List<ProductImage> productImages)
+        public async static Task AddNewProduct(Product newProduct, List<ProductImage> productImages, List<ProductCategory> productCategories)
         {
 
             using (var entities = EntityProvider.CreateEntities())
@@ -222,13 +222,20 @@ namespace StorageSystem.DataAccess
 
                 }
 
+                foreach (var category in productCategories)
+                {
+                    category.ProductId = newProduct.ProductId;
+
+                    entities.ProductCategory.Add(category);
+                }
+
 
                 await SaveChanges(entities);
 
             }
         }
 
-        public async static Task EditProduct(Product editedProduct, List<ProductImage> newProductImages)
+        public async static Task EditProduct(Product editedProduct, List<ProductImage> newProductImages, List<ProductCategory> newProductCategories)
         {
             using (var entities = EntityProvider.CreateEntities())
             {
@@ -238,6 +245,9 @@ namespace StorageSystem.DataAccess
                 var oldProductImages = entities.ProductImage.Where(pi => pi.ProductId == editedProduct.ProductId).ToList();
                 entities.ProductImage.RemoveRange(oldProductImages);
 
+                var oldCategories = entities.ProductCategory.Where(pc => pc.ProductId == editedProduct.ProductId).ToList();
+                entities.ProductCategory.RemoveRange(oldCategories);
+
                 await SaveChanges(entities);
 
                 foreach (var image in newProductImages)
@@ -246,6 +256,17 @@ namespace StorageSystem.DataAccess
                     image.ProductId = editedProduct.ProductId;
                     entities.ProductImage.Add(image);
 
+                }
+
+                await SaveChanges(entities);
+
+                foreach (var category in newProductCategories)
+                {
+                    category.ProductId = editedProduct.ProductId;
+                    category.Product = null;
+                    category.Category = null;
+
+                    entities.ProductCategory.Add(category);
                 }
 
 
@@ -296,6 +317,17 @@ namespace StorageSystem.DataAccess
                     .SingleOrDefaultAsync(p => p.ProductId == productId);
 
             }
+        }
+
+        public async static Task<List<Category>> GetCategories()
+        {
+
+            using (var entities = EntityProvider.CreateEntities())
+            {
+                return await entities.Category.ToListAsync();                   
+            }
+
+
         }
 
 

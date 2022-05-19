@@ -435,6 +435,9 @@
     </Compile>
     <Compile Include="Style\Themes\ThemesController.cs" />
     <Compile Include="UserInteraction\InputValidation.cs" />
+    <Compile Include="Windows\SelectCategoryWindow.xaml.cs">
+      <DependentUpon>SelectCategoryWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\ChangeWarehouseAmountWindow.xaml.cs">
       <DependentUpon>ChangeWarehouseAmountWindow.xaml</DependentUpon>
     </Compile>
@@ -454,6 +457,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\WarehouseListPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\SelectCategoryWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

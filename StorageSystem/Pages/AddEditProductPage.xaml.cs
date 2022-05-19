@@ -192,7 +192,7 @@ namespace StorageSystem.Pages
 
             FillProductFields();
 
-            await StorageDbOperations.AddNewProduct(CurrentProduct, ProductImageList.ToList());
+            await StorageDbOperations.AddNewProduct(CurrentProduct, ProductImageList.ToList(), ProductCategoryList.ToList());
 
             MessageBoxDisplay.DisplayNotification("Товар успешно добавлен");
 
@@ -209,7 +209,7 @@ namespace StorageSystem.Pages
             FillProductFields();
 
 
-            await StorageDbOperations.EditProduct(CurrentProduct, ProductImageList.ToList());
+            await StorageDbOperations.EditProduct(CurrentProduct, ProductImageList.ToList(), ProductCategoryList.ToList());
 
             MessageBoxDisplay.DisplayNotification("Товар успешно изменен");
 
@@ -230,6 +230,7 @@ namespace StorageSystem.Pages
             CurrentProduct.ProductTypeId = ((ProductType)ProductTypeComboBox.SelectedValue).ProductTypeId;
 
             CurrentProduct.ProductType = null;
+            CurrentProduct.ProductCategory = null;
 
         }
 
@@ -356,6 +357,46 @@ namespace StorageSystem.Pages
             decimal totalPrice = defaultPrice - (discountPercent * onePercent);
 
             TotalPriceTextBlock.Text = $"{totalPrice:N} руб";
+
+        }
+
+        private void AddCategoryButton_Click(object sender, RoutedEventArgs e)
+        {
+
+            var selectCategoryWindow = new SelectCategoryWindow();
+            if ((bool)selectCategoryWindow.ShowDialog() == true)
+            {
+                var selectedCategory = selectCategoryWindow.SelectedCategory;
+
+                if (ProductCategoryList.Select(pc=> pc.Category).Contains(selectedCategory))
+                {
+                    MessageBoxDisplay.DisplayError("Товар уже относится к этой категории");
+                    return;
+                }
+                else
+                {
+                    ProductCategoryList.Add(new ProductCategory() { CategoryId = selectedCategory.CategoryId, Category = selectedCategory });
+                   
+                }
+
+                
+                
+            }
+
+
+        }
+
+        private void DeleteCategoryButton_Click(object sender, RoutedEventArgs e)
+        {
+
+
+            if (CategoryListView.SelectedItem != null)
+            {
+
+                ProductCategoryList.Remove((ProductCategory)CategoryListView.SelectedItem);
+
+            }
+
 
         }
     }
