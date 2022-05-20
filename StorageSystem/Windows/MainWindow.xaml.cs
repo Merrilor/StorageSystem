@@ -147,5 +147,11 @@ namespace StorageSystem.Windows
             AddButtonDelay();
          
         }
+
+        private void AddNewCategoryButton_Click(object sender, RoutedEventArgs e)
+        {
+            ContentFrame.Navigate(new AddCategoryPage());
+            AddButtonDelay();
+        }
     }
 }

@@ -399,5 +399,61 @@ namespace StorageSystem.Pages
 
 
         }
+
+        private void SaveCategoryButton_Click(object sender, RoutedEventArgs e)
+        {
+
+
+            if (string.IsNullOrEmpty(CategoryNameTextBox.Text)){
+
+                MessageBoxDisplay.DisplayError("Неоходимо ввести название категории");
+
+            }
+
+            Category newCategory = new Category() { Name = CategoryNameTextBox.Text };
+
+            AddNewCategory(newCategory);
+
+        }
+
+        private async void AddNewCategory(Category category)
+        {
+
+
+
+            if(await StorageDbOperations.TryAddNewCategory(category) == true)
+            {
+
+                MessageBoxDisplay.DisplayNotification("Новая категория успешно добавлена");
+                CategoryNameTextBox.Text = "";
+
+            }
+            else
+            {
+
+                MessageBoxDisplay.DisplayNotification("Эта категория уже существует");
+            }
+
+
+
+
+
+        }
+
+        private void NewCategoryButton_Click(object sender, RoutedEventArgs e)
+        {
+            if(NewCategoryStackPanel.Visibility == Visibility.Hidden)
+            {
+
+                NewCategoryStackPanel.Visibility = Visibility.Visible;
+
+            }
+            else
+            {
+                NewCategoryStackPanel.Visibility = Visibility.Hidden;
+
+
+            }
+        }
     }
 }

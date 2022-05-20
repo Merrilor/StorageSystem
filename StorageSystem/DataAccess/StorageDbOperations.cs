@@ -330,6 +330,25 @@ namespace StorageSystem.DataAccess
 
         }
 
+        public async static Task<bool> TryAddNewCategory(Category newCategory)
+        {
+
+            using (var entities = EntityProvider.CreateEntities())
+            {
+
+                if(entities.Category.Where(c=> c.Name == newCategory.Name).Count() != 0)
+                {
+                    return false;
+                }
+
+                entities.Category.Add(newCategory);
+
+                await SaveChanges(entities);
+
+                return true;
+
+            }
+        }
 
     }
 }

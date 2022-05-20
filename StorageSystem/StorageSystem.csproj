@@ -386,6 +386,9 @@
     <Compile Include="Model\WarehouseUnit.cs">
       <DependentUpon>StorageModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Pages\AddCategoryPage.xaml.cs">
+      <DependentUpon>AddCategoryPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\AddEditProductPage.xaml.cs">
       <DependentUpon>AddEditProductPage.xaml</DependentUpon>
     </Compile>
@@ -444,6 +447,10 @@
     <Compile Include="Windows\SettingsWindow.xaml.cs">
       <DependentUpon>SettingsWindow.xaml</DependentUpon>
     </Compile>
+    <Page Include="Pages\AddCategoryPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\AddEditProductPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

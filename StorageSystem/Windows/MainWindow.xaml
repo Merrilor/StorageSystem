@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:StorageSystem"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
-        mc:Ignorable="d"       
+        mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         WindowState="Maximized"
         Style="{DynamicResource CustomWindowStyle}"
@@ -98,8 +98,9 @@
             </Grid.RowDefinitions>
 
 
-            <StackPanel HorizontalAlignment="Center" Orientation="Vertical">
-                
+            <StackPanel HorizontalAlignment="Center"
+                        Orientation="Vertical">
+
                 <Image Source="/Image/iconMain.png"
                        Width="60">
 
@@ -108,11 +109,10 @@
                 <TextBlock Text="СИСТЕМА СКЛАДА" />
 
             </StackPanel>
-            
 
-            <StackPanel 
-                x:Name="MenuStackPanel"
-                Grid.RowSpan="3"
+
+            <StackPanel x:Name="MenuStackPanel"
+                        Grid.RowSpan="3"
                         Grid.Row="1">
 
                 <Expander Header="Склад">
@@ -132,15 +132,15 @@
                                 Style="{DynamicResource LeftContentAligned}"
                                 Click="ProductListButton_Click" />
 
-                        <Button 
-                            x:Name="AddProductButton"
-                            Content="Добавление товаров"
-                                Style="{DynamicResource LeftContentAligned}" 
-                            Click="AddProductButton_Click"
-                            />
+                        <Button x:Name="AddProductButton"
+                                Content="Добавление товаров"
+                                Style="{DynamicResource LeftContentAligned}"
+                                Click="AddProductButton_Click" />
 
-                        <Button Content="Добавление категорий"
-                                Style="{DynamicResource LeftContentAligned}" />
+                        <Button x:Name="AddNewCategoryButton"
+                                Content="Добавление категорий"
+                                Style="{DynamicResource LeftContentAligned}"
+                                Click="AddNewCategoryButton_Click" />
 
                         <Button Content="Статистика"
                                 Style="{DynamicResource LeftContentAligned}" />
