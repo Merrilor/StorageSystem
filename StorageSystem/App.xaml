@@ -4,7 +4,7 @@
              xmlns:local="clr-namespace:StorageSystem"
              Exit="Application_Exit"
              Startup="Application_Startup"
-             StartupUri="Windows/MainWindow.xaml">
+             StartupUri="Windows/LoginWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>

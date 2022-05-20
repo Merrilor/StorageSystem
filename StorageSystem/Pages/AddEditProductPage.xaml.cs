@@ -72,6 +72,7 @@ namespace StorageSystem.Pages
 
             var lastProduct =  await StorageDbOperations.GetLastProduct();
             ProductCodeTextBox.Text = (lastProduct.Code + 1).ToString();
+            
 
             ImageListView.ItemsSource = ProductImageList;
             CategoryListView.ItemsSource = ProductCategoryList;
@@ -411,6 +412,7 @@ namespace StorageSystem.Pages
             }
 
             Category newCategory = new Category() { Name = CategoryNameTextBox.Text };
+
 
             AddNewCategory(newCategory);
 

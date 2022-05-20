@@ -39,91 +39,99 @@
             </Grid.ColumnDefinitions>
 
 
-            <StackPanel Margin="5">
+            <StackPanel Grid.RowSpan="5">
 
-                <TextBlock Text="Название" />
 
-                <TextBox  x:Name="ProductTitleTextBox"
-                          HorizontalContentAlignment="Left"
-                          VerticalContentAlignment="Center"
-                          MaxLength="60"
-                          Margin="0 5 0 0"
-                          MinHeight="35"
-                          MaxHeight="50"
-                          Text="{Binding Title}" />
+                <StackPanel Margin="5">
+
+                    <TextBlock Text="Название" />
+
+                    <TextBox  x:Name="ProductTitleTextBox"
+                              HorizontalContentAlignment="Left"
+                              VerticalContentAlignment="Center"
+                              MaxLength="60"
+                              Margin="0 5 0 0"
+                              MinHeight="35"
+                              MaxHeight="50"
+                              Text="{Binding Title}" />
+
+
+                </StackPanel>
+
+                <StackPanel Margin="5"
+                            Grid.Row="1">
+
+                    <TextBlock Text="Бренд" />
+
+                    <TextBox  x:Name="ProductBrandTextBox"
+                              HorizontalContentAlignment="Left"
+                              VerticalContentAlignment="Center"
+                              MaxLength="40"
+                              Margin="0 5 0 0"
+                              MinHeight="35"
+                              MaxHeight="50"
+                              Text="{Binding BrandName}" />
+
+
+                </StackPanel>
+
+                <StackPanel Margin="5"
+                            Grid.Row="2">
+
+                    <TextBlock Text="Код" />
+
+                    <TextBox  x:Name="ProductCodeTextBox"
+                              HorizontalContentAlignment="Left"
+                              VerticalContentAlignment="Center"
+                              MaxLength="40"
+                              Margin="0 5 0 0"
+                              MinHeight="35"
+                              IsReadOnly="True"
+                              MaxHeight="50" />
+
+
+                </StackPanel>
+
+                <StackPanel Margin="5"
+                            Grid.Row="3">
+
+                    <TextBlock Text="Штрихкод" />
+
+                    <TextBox  x:Name="ProductBarcodeTextBox"
+                              HorizontalContentAlignment="Left"
+                              VerticalContentAlignment="Center"
+                              MaxLength="13"
+                              Margin="0 5 0 0"
+                              MinHeight="35"
+                              MaxHeight="50"
+                              PreviewKeyDown="NumberTextBox_PreviewKeyDown"
+                              Text="{Binding Barcode}" />
+
+
+                </StackPanel>
+
+                <StackPanel Margin="5"
+                            Grid.Row="4">
+
+                    <TextBlock Text="Вес(грамм)" />
+
+                    <TextBox  x:Name="ProductWeightTextBox"
+                              HorizontalContentAlignment="Left"
+                              VerticalContentAlignment="Center"
+                              MaxLength="5"
+                              Margin="0 5 0 0"
+                              MinHeight="35"
+                              MaxHeight="50"
+                              PreviewKeyDown="NumberTextBox_PreviewKeyDown"
+                              Text="{Binding Weight}" />
+
+
+                </StackPanel>
 
 
             </StackPanel>
 
-            <StackPanel Margin="5"
-                        Grid.Row="1">
-
-                <TextBlock Text="Бренд" />
-
-                <TextBox  x:Name="ProductBrandTextBox"
-                          HorizontalContentAlignment="Left"
-                          VerticalContentAlignment="Center"
-                          MaxLength="40"
-                          Margin="0 5 0 0"
-                          MinHeight="35"
-                          MaxHeight="50"
-                          Text="{Binding BrandName}" />
-
-
-            </StackPanel>
-
-            <StackPanel Margin="5"
-                        Grid.Row="2">
-
-                <TextBlock Text="Код" />
-
-                <TextBox  x:Name="ProductCodeTextBox"
-                          HorizontalContentAlignment="Left"
-                          VerticalContentAlignment="Center"
-                          MaxLength="40"
-                          Margin="0 5 0 0"
-                          MinHeight="35"
-                          IsReadOnly="True"
-                          MaxHeight="50" />
-
-
-            </StackPanel>
-
-            <StackPanel Margin="5"
-                        Grid.Row="3">
-
-                <TextBlock Text="Штрихкод" />
-
-                <TextBox  x:Name="ProductBarcodeTextBox"
-                          HorizontalContentAlignment="Left"
-                          VerticalContentAlignment="Center"
-                          MaxLength="13"
-                          Margin="0 5 0 0"
-                          MinHeight="35"
-                          MaxHeight="50"
-                          PreviewKeyDown="NumberTextBox_PreviewKeyDown"
-                          Text="{Binding Barcode}" />
-
-
-            </StackPanel>
-
-            <StackPanel Margin="5"
-                        Grid.Row="4">
-
-                <TextBlock Text="Вес(грамм)" />
-
-                <TextBox  x:Name="ProductWeightTextBox"
-                          HorizontalContentAlignment="Left"
-                          VerticalContentAlignment="Center"
-                          MaxLength="5"
-                          Margin="0 5 0 0"
-                          MinHeight="35"
-                          MaxHeight="50"
-                          PreviewKeyDown="NumberTextBox_PreviewKeyDown"
-                          Text="{Binding Weight}" />
-
-
-            </StackPanel>
+            
 
             <GroupBox Grid.Row="5"
                       Grid.ColumnSpan="2"
@@ -263,9 +271,9 @@
                         <Button x:Name="AddImageButton"
                                 Width="30"
                                 Height="30"
-                                FontSize="25"
+                                FontSize="20"
                                 Style="{DynamicResource RoundedCorners}"
-                                Content="&#xf0fe;"
+                                Content="&#xf067;"
                                 FontFamily="{StaticResource FontAwesome}"
                                 Click="AddImageButton_Click" />
 

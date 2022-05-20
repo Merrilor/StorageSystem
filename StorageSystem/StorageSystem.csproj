@@ -398,6 +398,9 @@
     <Compile Include="Pages\RegisterUserPage.xaml.cs">
       <DependentUpon>RegisterUserPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\UserListPage.xaml.cs">
+      <DependentUpon>UserListPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\WarehouseListPage.xaml.cs">
       <DependentUpon>WarehouseListPage.xaml</DependentUpon>
     </Compile>
@@ -460,6 +463,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\RegisterUserPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\UserListPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -15,7 +15,6 @@ namespace StorageSystem.DataAccess
 
         private static StorageEntities _persistentEntities = new StorageEntities();
        
-
         static StorageDbOperations()
         {
 
@@ -169,6 +168,7 @@ namespace StorageSystem.DataAccess
                 return await entities.Product.Where(p => p.Code >= minCode && p.Code <= maxCode)
                     .Include(p=> p.ProductImage)
                     .Include(p=> p.ProductCategory)
+                    .Include(p=> p.ProductType)
                     .Include(p=> p.ProductCategory.Select(pc=> pc.Category))
                     .ToListAsync();
 
