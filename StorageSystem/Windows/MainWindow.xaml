@@ -241,6 +241,14 @@
                                 Style="{DynamicResource LeftContentAligned}" />
                         <Button Content="Добавить сотрудника"
                                 Style="{DynamicResource LeftContentAligned}" />
+                        
+                        
+                        <Button 
+                            x:Name="LoginHistoryButton"
+                            Content="История логинов"
+                                Style="{DynamicResource LeftContentAligned}" 
+                            Click="LoginHistoryButton_Click"
+                            />
 
                     </StackPanel>
 

@@ -164,5 +164,10 @@ namespace StorageSystem.Windows
             NavigateToPage(new UserListPage());
 
         }
+
+        private void LoginHistoryButton_Click(object sender, RoutedEventArgs e)
+        {
+            NavigateToPage(new LoginHistoryPage());
+        }
     }
 }

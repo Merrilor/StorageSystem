@@ -1,0 +1,121 @@
+﻿<Page x:Class="StorageSystem.Pages.LoginHistoryPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:StorageSystem.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="История входа/выхода">
+
+    <Page.Resources>
+        <CollectionViewSource Source="{Binding HistoryList}"
+                              IsLiveSortingRequested="True"
+                              x:Key="MyKey" />
+    </Page.Resources>
+
+    <Grid>
+
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition Width="200" />
+        </Grid.ColumnDefinitions>
+
+        <Border Grid.ColumnSpan="2"
+                Background="{DynamicResource ControlDarkerBackground}" />
+
+        <Border Grid.RowSpan="2"
+                Grid.Column="1"
+                Background="{DynamicResource ControlDarkerBackground}" />
+
+
+        <Grid>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Margin="5"
+                        Orientation="Vertical">
+
+                <TextBlock Text="Поиск" />
+
+                <TextBox x:Name="SearchTextBox"
+                         MaxLength="20"
+                         Margin="0,5,0,0"
+                         Width="150"
+                         HorizontalAlignment="Left"
+                         Background="{DynamicResource ControlBrightDefaultBackground}"
+                         TextChanged="SearchTextBox_TextChanged" />
+
+            </StackPanel>
+
+
+        </Grid>
+
+        <DataGrid x:Name="HistoryDatagrid"
+                  Grid.Row="1"
+                  Margin="5"
+                  AutoGenerateColumns="False"
+                  Background="{DynamicResource BackgroundColour}"
+                  CanUserAddRows="False"
+                  CanUserDeleteRows="False"
+                  CanUserResizeRows="False"
+                  CanUserReorderColumns="False"
+                  CanUserResizeColumns="True"
+                  ItemsSource="{Binding Source={StaticResource MyKey}}">
+
+
+
+            <DataGrid.Columns>
+
+
+                <DataGridTemplateColumn Header="Фото"
+                                        MaxWidth="80"
+                                        Width="*">
+
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Image MaxWidth="80"
+                                   MaxHeight="80"
+                                   Source="{Binding User.FullPhotoPath}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+
+
+                </DataGridTemplateColumn>
+
+                <DataGridTextColumn Header="Логин"
+                                    Width="*"
+                                    IsReadOnly="True"
+                                    Binding="{Binding User.Login}" />
+
+                <DataGridTextColumn Header="Дата входа"
+                                    Width="*"
+                                    IsReadOnly="True"
+                                    Binding="{Binding LoginDatetime}" />
+
+                <DataGridTextColumn Header="Дата выхода"
+                                    Width="*"
+                                    IsReadOnly="True"
+                                    Binding="{Binding ExitDatetime, TargetNullValue='Нет'}" />
+
+
+            </DataGrid.Columns>
+
+
+
+        </DataGrid>
+
+
+
+    </Grid>
+</Page>
