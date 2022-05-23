@@ -382,6 +382,7 @@
     <Compile Include="Model\User.cs">
       <DependentUpon>StorageModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\UserExtension.cs" />
     <Compile Include="Model\WarehouseExtension.cs" />
     <Compile Include="Model\WarehouseUnit.cs">
       <DependentUpon>StorageModel.tt</DependentUpon>

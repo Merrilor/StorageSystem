@@ -67,19 +67,26 @@ namespace StorageSystem.Windows
 
         }
 
-        private void WarehouseListButton_Click(object sender, RoutedEventArgs e)
-        {           
-            ContentFrame.Navigate(new WarehouseListPage());
+
+        private void NavigateToPage(Page page)
+        {
+
+            ContentFrame.Navigate(page);
             AddButtonDelay();
+            WindowHeaderTextBlock.Text = page.Title;
 
+        }
 
+        private void WarehouseListButton_Click(object sender, RoutedEventArgs e)
+        {
+
+            NavigateToPage(new WarehouseListPage());
+            
         }
 
         private void AddUserButton_Click(object sender, RoutedEventArgs e)
         {
-            ContentFrame.Navigate(new RegisterUserPage());
-            AddButtonDelay();
-
+            NavigateToPage(new RegisterUserPage());
 
         }
 
@@ -116,8 +123,7 @@ namespace StorageSystem.Windows
 
         private void ProductListButton_Click(object sender, RoutedEventArgs e)
         {
-            ContentFrame.Navigate(new ProductListPage());
-            AddButtonDelay();
+            NavigateToPage(new ProductListPage());
 
         }
 
@@ -143,15 +149,20 @@ namespace StorageSystem.Windows
 
         private void AddProductButton_Click(object sender, RoutedEventArgs e)
         {
-            ContentFrame.Navigate(new AddEditProductPage());
-            AddButtonDelay();
-         
+            NavigateToPage(new AddEditProductPage());
+
         }
 
         private void AddNewCategoryButton_Click(object sender, RoutedEventArgs e)
         {
-            ContentFrame.Navigate(new AddCategoryPage());
-            AddButtonDelay();
+            NavigateToPage(new AddCategoryPage());
+        }
+
+        private void UserButton_Click(object sender, RoutedEventArgs e)
+        {
+
+            NavigateToPage(new UserListPage());
+
         }
     }
 }

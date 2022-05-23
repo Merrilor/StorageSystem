@@ -1,17 +1,156 @@
 ﻿<Page x:Class="StorageSystem.Pages.UserListPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="clr-namespace:StorageSystem.Pages"
-      mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="UserListPage">
+      mc:Ignorable="d"
+      xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+      d:DesignHeight="450"
+      d:DesignWidth="800"
+      Title="Список пользователей">
 
     <Grid>
-        
-        
-        
-        
+
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition Width="200" />
+        </Grid.ColumnDefinitions>
+
+        <Border Grid.ColumnSpan="2"
+                Background="{DynamicResource ControlDarkerBackground}" />
+
+        <Border Grid.RowSpan="2"
+                Grid.Column="1"
+                Background="{DynamicResource ControlDarkerBackground}" />
+
+
+        <Grid>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Margin="5"
+                        Orientation="Vertical">
+
+                <TextBlock Text="Поиск" />
+
+                <TextBox x:Name="SearchTextBox"
+                         MaxLength="20"
+                         Margin="0,5,0,0"
+                         Width="150"
+                         HorizontalAlignment="Left"
+                         Background="{DynamicResource ControlBrightDefaultBackground}"
+                         TextChanged="SearchTextBox_TextChanged" />
+
+            </StackPanel>
+
+
+        </Grid>
+
+        <StackPanel Orientation="Horizontal"
+                    Grid.Column="1">
+
+
+
+        </StackPanel>
+
+
+        <Grid Grid.Column="1"
+              Grid.Row="1"
+              Margin="5">
+
+            <GroupBox   BorderThickness="2">
+
+                <GroupBox.Header>
+                    <TextBlock Text="Фильтрация"
+                               FontWeight="Bold" />
+                </GroupBox.Header>
+
+
+                <StackPanel Orientation="Vertical">
+
+
+                    <GroupBox Header="Роль пользователя"
+                              BorderThickness="0">
+
+                        <ComboBox x:Name="UserRoleComboBox"
+                                  SelectionChanged="UserRoleComboBox_SelectionChanged"
+                                  DisplayMemberPath="Name">
+
+                        </ComboBox>
+                    </GroupBox>
+                </StackPanel>
+            </GroupBox>
+        </Grid>
+
+
+        <ScrollViewer Grid.Row="1">
+
+
+            <ItemsControl x:Name="UserListItemsControl"
+                          Margin="10">
+
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Height="75"
+                              Margin="5">
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="75" />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+
+
+                            <Border Grid.ColumnSpan="6"
+                                    Background="{DynamicResource ControlBrightDefaultBorderBrush}" />
+
+                            <Image Grid.Column="0"
+                                   Margin="5"
+                                   Source="{Binding FullPhotoPath}" />
+
+                            <TextBlock Grid.Column="1"
+                                       VerticalAlignment="Center"
+                                       Margin="5,0,0,0"
+                                       Text="{Binding Login}" />
+
+                            <TextBlock Grid.Column="2"
+                                       VerticalAlignment="Center"
+                                       Text="{Binding LastLoginDate, StringFormat='{}Дата последнего входа: {0:d}', TargetNullValue='Дата последнего входа: Никогда'}" />
+
+                            <TextBlock Grid.Column="3"
+                                       VerticalAlignment="Center"
+                                       Text="{Binding RegistrationDate ,StringFormat='{}Дата регистрации: {0:d}'}" />
+
+                            <TextBlock Grid.Column="4"
+                                       VerticalAlignment="Center"
+                                       Text="{Binding Role.Name, StringFormat='{} Роль: {0}'}" />
+
+
+
+                        </Grid>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+
+
+
+
+
+
+
     </Grid>
 </Page>

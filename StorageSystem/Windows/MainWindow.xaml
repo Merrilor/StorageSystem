@@ -10,7 +10,7 @@
         WindowState="Maximized"
         Style="{DynamicResource CustomWindowStyle}"
         Title="Storage System"
-        MinHeight="600"
+        MinHeight="620"
         MinWidth="800">
     <Grid>
 
@@ -37,6 +37,9 @@
             </Grid.ColumnDefinitions>
 
 
+           
+            
+
             <Border Grid.ColumnSpan="6"
                     Background="{DynamicResource ControlDarkerBackground}"
                     BorderBrush="{DynamicResource ContainerBorder}" />
@@ -53,6 +56,21 @@
 
             </Border>
 
+            <Grid Grid.ColumnSpan="6">
+
+                <TextBlock Grid.Column="3"
+                           Text="Список товаров"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Center"
+                           Margin="10,0,0,0"
+                           FontSize="20"
+                           FontWeight="Bold" 
+                           x:Name="WindowHeaderTextBlock"
+                           />
+
+
+            </Grid>
+
             <TextBlock x:Name="UserNameTextBlock"
                        Grid.Column="1"
                        VerticalAlignment="Center"
@@ -67,6 +85,7 @@
                     FontSize="20"
                     Click="LogoutButton_Click" />
 
+           
 
 
             <Button Grid.Column="4"
@@ -211,7 +230,9 @@
                     <StackPanel>
 
                         <Button Content="Пользователи системы"
-                                Style="{DynamicResource LeftContentAligned}" />
+                                Style="{DynamicResource LeftContentAligned}"
+                                x:Name="UserButton"
+                                Click="UserButton_Click" />
                         <Button x:Name="AddUserButton"
                                 Content="Добавить пользователя"
                                 Style="{DynamicResource LeftContentAligned}"
@@ -237,7 +258,7 @@
                Grid.Column="1"
                x:Name="ContentFrame"
                NavigationUIVisibility="Hidden"
-               Source="/Pages/WarehouseListPage.xaml">
+               Source="/Pages/ProductListPage.xaml">
 
 
 

@@ -350,5 +350,21 @@ namespace StorageSystem.DataAccess
             }
         }
 
+        public async static Task<List<User>> GetAllUsers()
+        {
+
+            using (var entities = EntityProvider.CreateEntities())
+            {
+
+                return await entities.User.Include(u => u.Role).ToListAsync();
+
+            }
+
+
+        }
+
+
+       
+
     }
 }

@@ -10,7 +10,7 @@
       xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
       Loaded="Page_Loaded"
       KeepAlive="True"
-      Title="ProductListPage">
+      Title="Список товаров">
 
     <Grid>
 
