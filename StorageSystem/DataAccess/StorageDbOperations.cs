@@ -370,7 +370,9 @@ namespace StorageSystem.DataAccess
             using (var entities = EntityProvider.CreateEntities())
             {
 
-                return await entities.LoginHistory.OrderByDescending(lh=> lh.LoginDatetime).Include(h => h.User).ToListAsync();
+                return await entities.LoginHistory.OrderByDescending(lh=> lh.LoginDatetime)
+                    .Include(h => h.User)
+                    .ToListAsync();
 
             }
 

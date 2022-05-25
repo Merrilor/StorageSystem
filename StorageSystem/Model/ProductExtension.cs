@@ -33,13 +33,7 @@ namespace StorageSystem.Model
 
             get                      
             {
-
-
-
-                return string.Join(",", ProductCategory.Select(pc => pc.Category.Name));
-            
-            
-            
+                return string.Join(",", ProductCategory.Select(pc => pc.Category.Name));                                  
             } 
 
         }
