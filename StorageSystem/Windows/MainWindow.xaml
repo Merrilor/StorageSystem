@@ -33,12 +33,12 @@
                 <ColumnDefinition Width="50" />
                 <ColumnDefinition />
                 <ColumnDefinition Width="50" />
-                <ColumnDefinition Width="50" />
+
             </Grid.ColumnDefinitions>
 
 
-           
-            
+
+
 
             <Border Grid.ColumnSpan="6"
                     Background="{DynamicResource ControlDarkerBackground}"
@@ -64,9 +64,8 @@
                            HorizontalAlignment="Center"
                            Margin="10,0,0,0"
                            FontSize="20"
-                           FontWeight="Bold" 
-                           x:Name="WindowHeaderTextBlock"
-                           />
+                           FontWeight="Bold"
+                           x:Name="WindowHeaderTextBlock" />
 
 
             </Grid>
@@ -85,7 +84,7 @@
                     FontSize="20"
                     Click="LogoutButton_Click" />
 
-           
+
 
 
             <Button Grid.Column="4"
@@ -96,11 +95,11 @@
                     FontSize="25"
                     Click="ThemeButton_Click" />
 
-            <Button Grid.Column="5"
+            <!--<Button Grid.Column="5"
                     Content="&#xf013;"
                     FontFamily="{DynamicResource FontAwesome}"
                     FontSize="25"
-                    Margin="5" />
+                    Margin="5" />-->
 
 
 
@@ -161,8 +160,8 @@
                                 Style="{DynamicResource LeftContentAligned}"
                                 Click="AddNewCategoryButton_Click" />
 
-                        <Button Content="Статистика"
-                                Style="{DynamicResource LeftContentAligned}" />
+                        <!--<Button Content="Статистика"
+                                Style="{DynamicResource LeftContentAligned}" />-->
 
                     </StackPanel>
 
@@ -180,8 +179,8 @@
                                 Style="{DynamicResource LeftContentAligned}" />
                         <Button Content="Добавить заказ"
                                 Style="{DynamicResource LeftContentAligned}" />
-                        <Button Content="Статистика"
-                                Style="{DynamicResource LeftContentAligned}" />
+                        <!--<Button Content="Статистика"
+                                Style="{DynamicResource LeftContentAligned}" />-->
 
                     </StackPanel>
 
@@ -197,12 +196,14 @@
                                 Style="{DynamicResource LeftContentAligned}" />
                         <Button Content="Просмотр поставщиков"
                                 Style="{DynamicResource LeftContentAligned}" />
-                        <Button Content="Добавить поставщика"
-                                Style="{DynamicResource LeftContentAligned}" />
+                        <Button x:Name="AddSupplierButton"
+                                Content="Добавить поставщика"
+                                Style="{DynamicResource LeftContentAligned}"
+                                Click="AddSupplierButton_Click" />
                         <Button Content="Запросить поставку"
                                 Style="{DynamicResource LeftContentAligned}" />
-                        <Button Content="Статистика"
-                                Style="{DynamicResource LeftContentAligned}" />
+                        <!--<Button Content="Статистика"
+                                Style="{DynamicResource LeftContentAligned}" />-->
 
                     </StackPanel>
 
@@ -217,15 +218,16 @@
                                 Style="{DynamicResource LeftContentAligned}" />
                         <Button Content="Добавить клиента"
                                 Style="{DynamicResource LeftContentAligned}" />
-                        <Button Content="Статистика"
-                                Style="{DynamicResource LeftContentAligned}" />
+                        <!--<Button Content="Статистика"
+                                Style="{DynamicResource LeftContentAligned}" />-->
 
                     </StackPanel>
 
 
                 </Expander>
 
-                <Expander Header="Администрирование">
+                <Expander x:Name="AdminExpander"
+                          Header="Администрирование">
 
                     <StackPanel>
 
@@ -237,18 +239,16 @@
                                 Content="Добавить пользователя"
                                 Style="{DynamicResource LeftContentAligned}"
                                 Click="AddUserButton_Click" />
-                        <Button Content="Сотрудники"
+                        <!--<Button Content="Сотрудники"
                                 Style="{DynamicResource LeftContentAligned}" />
                         <Button Content="Добавить сотрудника"
-                                Style="{DynamicResource LeftContentAligned}" />
-                        
-                        
-                        <Button 
-                            x:Name="LoginHistoryButton"
-                            Content="История логинов"
-                                Style="{DynamicResource LeftContentAligned}" 
-                            Click="LoginHistoryButton_Click"
-                            />
+                                Style="{DynamicResource LeftContentAligned}" />-->
+
+
+                        <Button x:Name="LoginHistoryButton"
+                                Content="История логинов"
+                                Style="{DynamicResource LeftContentAligned}"
+                                Click="LoginHistoryButton_Click" />
 
                     </StackPanel>
 

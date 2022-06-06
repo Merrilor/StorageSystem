@@ -165,7 +165,7 @@
           <Key>
             <PropertyRef Name="SupplierId" />
           </Key>
-          <Property Name="SupplierId" Type="int" Nullable="false" />
+          <Property Name="SupplierId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Address" Type="nvarchar" MaxLength="150" Nullable="false" />
           <Property Name="Email" Type="nvarchar" MaxLength="120" Nullable="false" />

@@ -1,13 +1,14 @@
-﻿<Page x:Class="StorageSystem.Pages.RegisterUserPage"
+﻿<Page x:Class="StorageSystem.Pages.AddSupplierPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="clr-namespace:StorageSystem.Pages"
       mc:Ignorable="d"
+      xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
       d:DesignHeight="450"
       d:DesignWidth="800"
-      Title="Добавление пользователя">
+      Title="Добавление поставщика">
 
     <Grid Margin="5">
 
@@ -30,9 +31,9 @@
 
             <StackPanel Margin="5">
 
-                <TextBlock Text="Логин" />
+                <TextBlock Text="Название" />
 
-                <TextBox  x:Name="UserLoginTextBox"
+                <TextBox  x:Name="NameTextBox"
                           HorizontalContentAlignment="Left"
                           VerticalContentAlignment="Center"
                           MaxLength="40"
@@ -46,12 +47,12 @@
             <StackPanel Margin="5"
                         Grid.Row="1">
 
-                <TextBlock Text="Пароль" />
+                <TextBlock Text="Адрес" />
 
-                <TextBox  x:Name="UserPasswordTextBox"
+                <TextBox  x:Name="AddressTextBox"
                           HorizontalContentAlignment="Left"
                           VerticalContentAlignment="Center"
-                          MaxLength="40"
+                          MaxLength="140"
                           Margin="0 5 0 0"
                           MinHeight="35"
                           MaxHeight="50" />
@@ -62,16 +63,15 @@
             <StackPanel Margin="5"
                         Grid.Row="1">
 
-                <TextBlock Text="Роль" />
+                <TextBlock Text="Email" />
 
-                <ComboBox  x:Name="UserRoleComboBox"
-                           HorizontalContentAlignment="Left"
-                           VerticalContentAlignment="Center"
-                           Margin="0 5 0 0"
-                           MinHeight="35"
-                           MaxHeight="50"
-                           DisplayMemberPath="Name"
-                           SelectedIndex="0" />
+                <TextBox  x:Name="EmailTextBox"
+                          HorizontalContentAlignment="Left"
+                          VerticalContentAlignment="Center"
+                          MaxLength="100"
+                          Margin="0 5 0 0"
+                          MinHeight="35"
+                          MaxHeight="50" />
 
 
             </StackPanel>
@@ -79,22 +79,20 @@
             <StackPanel Margin="5"
                         Grid.Row="1">
 
-                <TextBlock Text="Фото" />
+                <TextBlock Text="Номер телефона" />
 
-                <Image  x:Name="UserImage"
-                        Height="100"
-                        Width="100"
-                        Margin="3"
-                        Source="/Image/placeholderUser.jpg"
-                        />
-
-                <Button x:Name="ChangeImageButton"
-                        Height="40"
-                        Margin="20,5"
-                        Style="{DynamicResource RoundedCorners}"
-                        Content="Изменить фото"
-                        Click="ChangeImageButton_Click"
-                        />
+                <xctk:MaskedTextBox  x:Name="PhoneTextBox"
+                                     HorizontalContentAlignment="Left"
+                                     VerticalContentAlignment="Center"
+                                     Background="{DynamicResource ControlDarkerBackground}"
+                                     Foreground="{DynamicResource ControlDefaultForeground}"
+                                     MaxLength="12"
+                                     Mask="0 000 000 00 00"
+                                     Margin="0 5 0 0"
+                                     MinHeight="35"
+                                     MaxHeight="50" 
+                                     PreviewKeyDown="PhoneTextBox_PreviewKeyDown"
+                                     />
 
 
             </StackPanel>
@@ -104,12 +102,21 @@
 
         </StackPanel>
 
-        <Button x:Name="AddUserButton"
+        <Button x:Name="AddSupplierButton"
                 Grid.Row="1"
                 Margin="20,5"
                 Content="Добавить"
                 Style="{DynamicResource RoundedCorners}"
-                Click="AddUserButton_Click" />
+                Click="AddSupplierButton_Click" />
+
+
+
+
+
+
+
+
+
 
 
     </Grid>

@@ -101,12 +101,12 @@
                 <DataGridTextColumn Header="Дата входа"
                                     Width="*"
                                     IsReadOnly="True"
-                                    Binding="{Binding LoginDatetime}" />
+                                    Binding="{Binding LoginDatetime, StringFormat='{}{0:dd/MM/yyyy HH:mm}'}" />
 
                 <DataGridTextColumn Header="Дата выхода"
                                     Width="*"
                                     IsReadOnly="True"
-                                    Binding="{Binding ExitDatetime, TargetNullValue='Нет'}" />
+                                    Binding="{Binding ExitDatetime, StringFormat='{}{0:dd/MM/yyyy HH:mm}' , TargetNullValue='Нет'}" />
 
 
             </DataGrid.Columns>

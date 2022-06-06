@@ -31,7 +31,6 @@ namespace StorageSystem.Model
         public decimal DefaultPrice { get; set; }
         public int DiscountPercent { get; set; }
         public Nullable<int> ProductTypeId { get; set; }
-       
     
         public virtual ProductType ProductType { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

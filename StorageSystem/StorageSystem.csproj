@@ -393,6 +393,9 @@
     <Compile Include="Pages\AddEditProductPage.xaml.cs">
       <DependentUpon>AddEditProductPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\AddSupplierPage.xaml.cs">
+      <DependentUpon>AddSupplierPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\LoginHistoryPage.xaml.cs">
       <DependentUpon>LoginHistoryPage.xaml</DependentUpon>
     </Compile>
@@ -459,6 +462,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\AddEditProductPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\AddSupplierPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

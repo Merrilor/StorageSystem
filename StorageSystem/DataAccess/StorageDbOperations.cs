@@ -10,15 +10,15 @@ namespace StorageSystem.DataAccess
 {
     public static class StorageDbOperations
     {
-     
+
         private static bool _Loaded = false;
 
         private static StorageEntities _persistentEntities = new StorageEntities();
-       
+
         static StorageDbOperations()
         {
 
-            
+
 
         }
 
@@ -28,9 +28,9 @@ namespace StorageSystem.DataAccess
             await _persistentEntities.SaveChangesAsync();
 
         }
-     
 
-        public async  static Task SaveChanges(StorageEntities entities)
+
+        public async static Task SaveChanges(StorageEntities entities)
         {
 
 
@@ -43,7 +43,7 @@ namespace StorageSystem.DataAccess
         public async static Task<bool> TryLoginUser(string login, string password)
         {
 
-            using(var entities = EntityProvider.CreateEntities())
+            using (var entities = EntityProvider.CreateEntities())
             {
 
 
@@ -99,7 +99,7 @@ namespace StorageSystem.DataAccess
 
 
 
-                 entities.SaveChanges();
+                entities.SaveChanges();
 
             }
 
@@ -119,13 +119,13 @@ namespace StorageSystem.DataAccess
         public async static Task<List<WarehouseUnit>> GetWarehouseRange(int minCode, int maxCode)
         {
 
-            
 
-                return await _persistentEntities.WarehouseUnit
-                .Where(wh => wh.Product.Code > minCode && wh.Product.Code < maxCode)
-                .ToListAsync();
 
-            
+            return await _persistentEntities.WarehouseUnit
+            .Where(wh => wh.Product.Code > minCode && wh.Product.Code < maxCode)
+            .ToListAsync();
+
+
 
         }
 
@@ -166,10 +166,10 @@ namespace StorageSystem.DataAccess
             {
 
                 return await entities.Product.Where(p => p.Code >= minCode && p.Code <= maxCode)
-                    .Include(p=> p.ProductImage)
-                    .Include(p=> p.ProductCategory)
-                    .Include(p=> p.ProductType)
-                    .Include(p=> p.ProductCategory.Select(pc=> pc.Category))
+                    .Include(p => p.ProductImage)
+                    .Include(p => p.ProductCategory)
+                    .Include(p => p.ProductType)
+                    .Include(p => p.ProductCategory.Select(pc => pc.Category))
                     .ToListAsync();
 
 
@@ -189,7 +189,7 @@ namespace StorageSystem.DataAccess
                 await SaveChanges(entities);
 
             }
-            
+
         }
 
 
@@ -252,7 +252,7 @@ namespace StorageSystem.DataAccess
 
                 foreach (var image in newProductImages)
                 {
-                    
+
                     image.ProductId = editedProduct.ProductId;
                     entities.ProductImage.Add(image);
 
@@ -275,7 +275,7 @@ namespace StorageSystem.DataAccess
             }
         }
 
-        public async static Task< List<string>> GetAllBrands()
+        public async static Task<List<string>> GetAllBrands()
         {
             using (var entities = EntityProvider.CreateEntities())
             {
@@ -295,7 +295,7 @@ namespace StorageSystem.DataAccess
             }
         }
 
-        public async  static Task<Product> GetLastProduct()
+        public async static Task<Product> GetLastProduct()
         {
             using (var entities = EntityProvider.CreateEntities())
             {
@@ -310,10 +310,10 @@ namespace StorageSystem.DataAccess
             using (var entities = EntityProvider.CreateEntities())
             {
                 return await entities.Product
-                    .Include(p=> p.ProductCategory)
-                    .Include(p=> p.ProductType)
-                    .Include(p=> p.ProductImage)
-                    .Include(p=> p.ProductCategory.Select(pc=> pc.Category))
+                    .Include(p => p.ProductCategory)
+                    .Include(p => p.ProductType)
+                    .Include(p => p.ProductImage)
+                    .Include(p => p.ProductCategory.Select(pc => pc.Category))
                     .SingleOrDefaultAsync(p => p.ProductId == productId);
 
             }
@@ -324,7 +324,7 @@ namespace StorageSystem.DataAccess
 
             using (var entities = EntityProvider.CreateEntities())
             {
-                return await entities.Category.ToListAsync();                   
+                return await entities.Category.ToListAsync();
             }
 
 
@@ -336,7 +336,7 @@ namespace StorageSystem.DataAccess
             using (var entities = EntityProvider.CreateEntities())
             {
 
-                if(entities.Category.Where(c=> c.Name == newCategory.Name).Count() != 0)
+                if (entities.Category.Where(c => c.Name == newCategory.Name).Count() != 0)
                 {
                     return false;
                 }
@@ -370,13 +370,25 @@ namespace StorageSystem.DataAccess
             using (var entities = EntityProvider.CreateEntities())
             {
 
-                return await entities.LoginHistory.OrderByDescending(lh=> lh.LoginDatetime)
+                return await entities.LoginHistory.OrderByDescending(lh => lh.LoginDatetime)
                     .Include(h => h.User)
                     .ToListAsync();
 
             }
 
 
+        }
+
+        public async static Task AddNewSupplier(Supplier newSuppplier)
+        {
+            using (var entities = EntityProvider.CreateEntities())
+            {
+
+                entities.Supplier.Add(newSuppplier);
+
+                await SaveChanges(entities);
+
+            }
         }
 
     }

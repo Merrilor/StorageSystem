@@ -40,7 +40,10 @@ namespace StorageSystem.Windows
 
             UserImage.Source = new BitmapImage(new Uri(Directory.GetCurrentDirectory() + CurrentUser.UserImagePath,UriKind.Absolute));
             UserNameTextBlock.Text = CurrentUser.Login;
-
+            if(CurrentUser.Role != UserRole.Admin)
+            {
+                AdminExpander.Visibility = Visibility.Collapsed;
+            }
 
         }
 
@@ -168,6 +171,11 @@ namespace StorageSystem.Windows
         private void LoginHistoryButton_Click(object sender, RoutedEventArgs e)
         {
             NavigateToPage(new LoginHistoryPage());
+        }
+
+        private void AddSupplierButton_Click(object sender, RoutedEventArgs e)
+        {
+            NavigateToPage(new AddSupplierPage());
         }
     }
 }
