@@ -177,5 +177,10 @@ namespace StorageSystem.Windows
         {
             NavigateToPage(new AddSupplierPage());
         }
+      
+        private void RegisterSupplyButton_Click(object sender, RoutedEventArgs e)
+        {
+            NavigateToPage(new RegisterSupplyPage());
+        }
     }
 }

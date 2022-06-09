@@ -50,6 +50,7 @@
         <AssociationConnector Association="StorageModel.FK_SaleOrderContent_WarehouseUnit" ManuallyRouted="false" />
         <AssociationConnector Association="StorageModel.FK_SupplyOrder_Supplier" ManuallyRouted="false" />
         <AssociationConnector Association="StorageModel.FK_SupplyOrder_WarehouseUnit" ManuallyRouted="false" />
+        <AssociationConnector Association="StorageModel.FK_SupplyOrder_User" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

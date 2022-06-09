@@ -12,7 +12,7 @@ namespace StorageSystem.DataAccess
 
         public static string Login;
 
-        public static int Id;
+        public static int Id = 1;
 
         public static UserRole Role;
 

@@ -1,4 +1,5 @@
 ﻿using StorageSystem.Model;
+using StorageSystem.UserInteraction;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,6 @@ namespace StorageSystem.DataAccess
         {
 
             return new StorageEntities();
-
 
         }
 

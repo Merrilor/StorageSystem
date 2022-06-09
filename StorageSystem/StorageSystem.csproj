@@ -402,6 +402,9 @@
     <Compile Include="Pages\ProductListPage.xaml.cs">
       <DependentUpon>ProductListPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\RegisterSupplyPage.xaml.cs">
+      <DependentUpon>RegisterSupplyPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\RegisterUserPage.xaml.cs">
       <DependentUpon>RegisterUserPage.xaml</DependentUpon>
     </Compile>
@@ -474,6 +477,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\ProductListPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\RegisterSupplyPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -558,7 +565,6 @@
     </EmbeddedResource>
     <EntityDeploy Include="Model\StorageModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>StorageModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
     <None Include="Model\StorageModel.edmx.diagram">
       <DependentUpon>StorageModel.edmx</DependentUpon>

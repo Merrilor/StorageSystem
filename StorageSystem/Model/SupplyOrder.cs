@@ -28,5 +28,6 @@ namespace StorageSystem.Model
         public virtual OrderStatus OrderStatus { get; set; }
         public virtual Supplier Supplier { get; set; }
         public virtual WarehouseUnit WarehouseUnit { get; set; }
+        public virtual User User { get; set; }
     }
 }

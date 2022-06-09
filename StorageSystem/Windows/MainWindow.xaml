@@ -200,8 +200,11 @@
                                 Content="Добавить поставщика"
                                 Style="{DynamicResource LeftContentAligned}"
                                 Click="AddSupplierButton_Click" />
-                        <Button Content="Запросить поставку"
-                                Style="{DynamicResource LeftContentAligned}" />
+                        <Button Content="Зарегистрировать поставку"
+                                Style="{DynamicResource LeftContentAligned}"
+                                x:Name="RegisterSupplyButton"
+                                Click="RegisterSupplyButton_Click"
+                                />
                         <!--<Button Content="Статистика"
                                 Style="{DynamicResource LeftContentAligned}" />-->
 

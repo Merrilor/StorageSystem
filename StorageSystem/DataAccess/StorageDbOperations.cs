@@ -169,6 +169,7 @@ namespace StorageSystem.DataAccess
                     .Include(p => p.ProductImage)
                     .Include(p => p.ProductCategory)
                     .Include(p => p.ProductType)
+                    .Include(p => p.WarehouseUnit)
                     .Include(p => p.ProductCategory.Select(pc => pc.Category))
                     .ToListAsync();
 
@@ -387,6 +388,59 @@ namespace StorageSystem.DataAccess
                 entities.Supplier.Add(newSuppplier);
 
                 await SaveChanges(entities);
+
+            }
+        }
+
+        public async static Task<List<Supplier>> GetAllSuppliers()
+        {
+            using (var entities = EntityProvider.CreateEntities())
+            {
+
+                return await entities.Supplier.ToListAsync();
+
+            }
+        }
+
+
+        public async static Task RegisterSupplyOrder(SupplyOrder order,Product selectedProduct)
+        {
+            using (var entities = EntityProvider.CreateEntities())
+            {
+
+                order.StatusId = entities.OrderStatus.SingleOrDefault(s => s.Name == "Доставлен").OrderStatusId;
+                order.EmployeeId = CurrentUser.Id;
+
+                var warehouse = selectedProduct.WarehouseUnit;
+                
+                if(warehouse.Count == 0)
+                {
+                    var newWarehouseUnit = new WarehouseUnit {
+
+                        ProductId = selectedProduct.ProductId,
+                        Amount = order.Amount,
+                        MinimalAmount = 10,
+                        IsAvailable = false
+                    };
+                    entities.WarehouseUnit.Add(newWarehouseUnit);
+                    entities.SaveChanges();
+                    order.WarehouseUnitId = newWarehouseUnit.WarehouseUnitId;
+                   
+                }
+                else
+                {
+                    warehouse.Single().Amount = warehouse.Single().Amount + order.Amount;
+                    entities.Entry(warehouse.Single()).State = EntityState.Modified;
+
+                    order.WarehouseUnitId = warehouse.Single().WarehouseUnitId;
+
+                    entities.SaveChanges();
+
+                }
+
+                entities.SupplyOrder.Add(order);
+                entities.SaveChanges();
+
 
             }
         }

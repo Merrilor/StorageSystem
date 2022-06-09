@@ -36,21 +36,31 @@ namespace StorageSystem.Windows
 
             }
 
-            if(await StorageDbOperations.TryLoginUser(UserLoginTextBox.Text, UserPasswordBox.Password))
+            try
             {
+                if (await StorageDbOperations.TryLoginUser(UserLoginTextBox.Text, UserPasswordBox.Password))
+                {
 
-                new MainWindow().Show();
+                    new MainWindow().Show();
 
-                this.Close();
+                    this.Close();
 
+                }
+                else
+                {
+
+                    MessageBoxDisplay.DisplayError("Пользователь не найден");
+                    return;
+
+                }
             }
-            else
+            catch 
             {
-
-                MessageBoxDisplay.DisplayError("Пользователь не найден");
+                MessageBoxDisplay.DisplayError("Нет соединения с бд");
                 return;
-
             }
+
+            
 
 
         }
